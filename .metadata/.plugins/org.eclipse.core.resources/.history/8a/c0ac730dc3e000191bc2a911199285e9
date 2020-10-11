@@ -1,0 +1,11 @@
+#include "pruebas.h"
+#include "memoriaDinamica.h"
+#include "referencias.h"
+
+int main(){
+
+	//prueba();
+	ejemplo();
+
+	return 0;
+}

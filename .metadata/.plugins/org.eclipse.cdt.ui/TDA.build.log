@@ -1,0 +1,20 @@
+22:24:57 **** Build of configuration Debug for project TDA ****
+make all 
+Building file: ../src/ejercicioParcial.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/ejercicioParcial.d" -MT"src/ejercicioParcial.o" -o "src/ejercicioParcial.o" "../src/ejercicioParcial.cpp"
+Finished building: ../src/ejercicioParcial.cpp
+ 
+Building file: ../src/entero.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/entero.d" -MT"src/entero.o" -o "src/entero.o" "../src/entero.cpp"
+Finished building: ../src/entero.cpp
+ 
+Building target: TDA
+Invoking: GCC C++ Linker
+g++  -o "TDA"  ./src/ejercicioParcial.o ./src/entero.o ./src/main.o   
+Finished building target: TDA
+ 
+
+22:24:59 Build Finished. 0 errors, 0 warnings. (took 1s.674ms)
+

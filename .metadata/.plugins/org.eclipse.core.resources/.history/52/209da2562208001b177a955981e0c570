@@ -1,0 +1,79 @@
+/*
+ ============================================================================
+ Name        : clase.c
+ Author      :
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "pantalla.h"
+#include "utn.h"
+
+int Clase12(void) {
+	setbuf(stdout,NULL);
+	Pantalla arrayPantalla[CANTIDAD_PANTALLAS];
+	int opcion;
+	//int orden;
+
+	if(pant_inicializarArray(arrayPantalla, CANTIDAD_PANTALLAS)==0)
+			{
+				printf("INIT OK\n");
+				do
+				{
+					if(utn_getNumero("\nMenu de opciones"
+									"\n1-dar de alta pantalla "
+									"\n2-modificar pantalla "
+									"\n3-eliminar pantalla "
+									"\n4-"
+									"\n5-imprimir lista "
+									"\n6-salir\n","Error,opcion invalida\n",&opcion, 2, 1, 6)== 0)
+					{
+						switch(opcion)
+						{
+						case 1:
+							if(pant_altaArray(arrayPantalla, CANTIDAD_PANTALLAS)==0)
+								{
+									printf("carga realizada con exito");
+								}
+							else
+							{
+								printf("no hay mas lugar");
+							}
+							break;
+						case 2:
+								if(	pant_modificarArray(arrayPantalla, CANTIDAD_PANTALLAS)==0)
+								{
+									printf("modificacion realizada con exito");
+								}
+							break;
+						case 3:
+								if(pant_bajaArray(arrayPantalla, CANTIDAD_PANTALLAS)==0)
+								{
+									printf("\nBaja realizada con exito");
+								}
+							break;
+						case 4:
+
+							break;
+						case 5:
+							pant_imprimirArray(arrayPantalla, CANTIDAD_PANTALLAS);
+							break;
+						case 6:
+							printf("saliste de la aplicacion");
+							break;
+						}
+					}
+
+				}while(opcion !=6);
+			}
+
+
+
+	return EXIT_SUCCESS;
+}

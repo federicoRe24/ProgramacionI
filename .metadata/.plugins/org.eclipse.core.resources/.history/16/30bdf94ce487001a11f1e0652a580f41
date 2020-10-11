@@ -1,0 +1,8 @@
+#include <stdio.h>
+int main() {
+   // printf() displays the string inside quotation
+   printf("Hola chuchita :)\n");
+   printf("\n");
+   printf("Te amo yo, el pollo.");
+   return 0;
+}

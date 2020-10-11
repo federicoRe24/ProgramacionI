@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 8
+void imprimirTexto(char array[]);
+
+int main(void)
+{
+	// Strings
+
+	int c;
+	char nombre[5]; // cadena de caracteres (array de chars)
+
+	nombre[0] = 'P';
+    nombre[1] = 'e';
+    nombre[2] = 'p';
+    nombre[3] = 'e';
+    nombre[4] = 0; // caracter terminador, caracter nulo
+    nombre[4] = '\0'; // caracter terminador, caracter nulo
+
+	// 65 = A
+	c = 65;
+
+	//%c para imprimir char
+	printf("c value: %c\n", c);
+
+	// imprimirTexto(nombre, 4); printf ya lo hace
+	// biblioteca string.h
+	printf("%s" ,nombre);
+}
+
+void imprimirTexto(char array[])
+{
+	int i= 0;
+
+	//for(int i=0; i<len; i++)
+	while(array[i]=!0)
+	{
+		printf("%c", array[i]);
+		i++;
+	}
+}

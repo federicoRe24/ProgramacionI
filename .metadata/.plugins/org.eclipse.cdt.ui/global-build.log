@@ -1,0 +1,20 @@
+21:49:24 **** Incremental Build of configuration Debug for project ProgramaciónI ****
+make all 
+Building file: ../src/Clase12.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Clase12.d" -MT"src/Clase12.o" -o "src/Clase12.o" "../src/Clase12.c"
+Finished building: ../src/Clase12.c
+ 
+Building file: ../src/contratacion.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/contratacion.d" -MT"src/contratacion.o" -o "src/contratacion.o" "../src/contratacion.c"
+Finished building: ../src/contratacion.c
+ 
+Building target: ProgramaciónI
+Invoking: GCC C Linker
+gcc  -o "ProgramaciónI"  ./src/Clase12.o ./src/Clase13.o ./src/alumno.o ./src/calculosArray.o ./src/contratacion.o ./src/main.o ./src/pantalla.o ./src/utn.o   
+Finished building target: ProgramaciónI
+ 
+21:49:30 **** Incremental Build of configuration Debug for project ProgramaciónI ****
+make all 
+make: Nothing to be done for 'all'.

@@ -1,0 +1,63 @@
+
+#include <stdio.h>
+#include "clase8.h"
+
+void clase8(void)
+{
+	int numeros[12]={3,7,4,5,2,3,7,1,7,3,2,7};
+
+	imprimirArray(numeros, 12);
+	contarSietes(numeros, 12);
+}
+
+/*1) Se tiene el siguiente array de variables del tipo int
+int numeros[12]={3,7,4,5,2,3,7,1,7,3,2,7};
+Hacer una funcion que reciba el array y su tamaño, y lo imprima. Escribir un programa para probar la funcion.*/
+
+// Le paso el len para que la función sepa hasta dónde llega el array
+int imprimirArray(int pArray[], int len)
+{
+	int retorno = -1;
+	int indice;
+
+	if(pArray!=NULL && len>0)
+	{
+	for(indice=0 ; indice<(len)  ; indice++)
+	{
+		printf("%d ", pArray[indice]);
+	}
+	printf("\n");
+	retorno = 0;
+	}
+
+	return retorno;
+}
+
+/* 2) Hacer una funcion que reciba el array del punto 1 y su tamaño, y cuente cuantas veces aparece el numero 7. Al terminar de contar,
+ * la funcion deberá imprimir por pantalla el valor contado. Escribir un programa para probar la funcion.
+ */
+
+int contarSietes(int pArray[], int len)
+{
+	int retorno = -1;
+	int indice;
+	int cantidadSietes = 0;
+
+	if(pArray!=NULL && len>0)
+	{
+	for(indice=0 ; indice<(len)  ; indice++)
+	{
+		if(pArray[indice] == 7)
+		{
+			cantidadSietes ++;
+		}
+	}
+	printf("La cantidad de veces que aparece el 7 en el array es %d \n", pArray[indice]);
+	retorno = 0;
+	}
+
+	return retorno;
+}
+
+
+

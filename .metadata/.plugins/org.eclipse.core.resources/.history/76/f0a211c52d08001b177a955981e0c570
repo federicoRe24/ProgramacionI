@@ -1,0 +1,31 @@
+
+
+#ifndef SRC_CONTRATACION_H_
+#define SRC_CONTRATACION_H_
+
+#include "pantalla.h"
+#define CUIT_LEN 15
+#define NOMBRE_LEN 100
+
+typedef struct
+{
+	int idContratacion;
+	int isEmpty;
+	char cuit [CUIT_LEN];
+	int cantidadDias;
+	char nombreVideo [NOMBRE_LEN];
+	int idcontratacionalla;
+}Contratacion;
+
+/*int contratacion_imprimir(Contratacion* pElemento);
+int contratacion_imprimirArray(Contratacion *array, int limite);
+int contratacion_inicializarArray(Contratacion *array, int limite);
+int contratacion_altaArray(Contratacion *array,int limite);
+int contratacion_modificarArray(Contratacion *array,int limite);
+int contratacion_bajaArray(Contratacion *array,int limite);
+int contratacion_buscarId(Contratacion *array, int limite,int valorBuscado);
+int contratacion_getNextEmptyIndex(Contratacion *array, int limite);*/
+int contratacion_alta(Pantalla *pPantallas, int limitePantallas, Contratacion *pContrataciones, int limiteContrataciones);
+
+
+#endif /* SRC_CONTRATACION_H_ */

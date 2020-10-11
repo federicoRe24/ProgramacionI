@@ -1,0 +1,28 @@
+#ifndef INTERFAZ_H_
+#define INTERFAZ_H_
+
+#include "estructuraDeMetrobus.h"
+#include <string>
+
+void menu(EstacionMetro array[]);
+
+void mostrarCasos(EstacionMetro array[],int contador);
+
+void filtrarPorLongitud(EstacionMetro array[]);
+
+void mostrarCasosEncontrados(EstacionMetro array[], int contador);
+
+//Filtra las estaciones de metrobus cuyas latitudes esten dentro de un rango
+void filtrarPorLatitud(EstacionMetro array[]);
+
+//Filtra las estaciones de metrobus por un valor exacto de identificacion. Muestra cantidad de casos y la estacion si existe
+void filtrarPorId(EstacionMetro array[]);
+
+//Recorre un array de estaciones y muestra cada una de ellas
+void mostrarCasosEncontrados(EstacionMetro array[], int contador);
+
+//Muestra al usuario la opcion de imprimir las estaciones filtradas
+void impresionDeDatosFiltrados(EstacionMetro array[], int contador);
+
+
+#endif /* INTERFAZ_H_ */

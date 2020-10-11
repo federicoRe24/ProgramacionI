@@ -1,0 +1,36 @@
+/*
+ * publicidad.h
+ *
+ *  Created on: 6 oct. 2020
+ *      Author: totinho91
+ */
+
+#ifndef SRC_CONTRATACION_H_
+#define SRC_CONTRATACION_H_
+
+#define CUIT_LEN 15
+#define CANTIDAD_PANTALLAS 100
+
+typedef struct
+{
+	int idContratacion;
+	int isEmpty;
+	char cuit [NOMBRE_LEN];
+	char nombre [NOMBRE_LEN];
+	int tipoPantalla;
+	float precioDia;
+	int idPantalla;
+}Contratacion;
+
+int pant_imprimir(Pantalla* pElemento);
+int pant_imprimirArray(Pantalla *array, int limite);
+int pant_inicializarArray(Pantalla *array, int limite);
+int pant_altaArray(Pantalla *array,int limite);
+int pant_modificarArray(Pantalla *array,int limite);
+int pant_bajaArray(Pantalla *array,int limite);
+int pant_buscarId(Pantalla *array, int limite,int valorBuscado);
+int pant_getNextEmptyIndex(Pantalla *array, int limite);
+
+
+
+#endif /* SRC_CONTRATACION_H_ */

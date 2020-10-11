@@ -1,0 +1,9 @@
+
+#include "pruebas.h"
+
+int main(){
+
+	prueba();
+
+	return 0;
+}

@@ -1,0 +1,13 @@
+
+#inclue <iostream>
+
+void ejercicio1(){
+
+	int a, b, *p, *q;
+	a = 10;
+	b = 20;
+	p = &a;
+	q = &b;
+	std::cout << "Se ejecuta p=&a; q=&b;" << std::endl;
+
+}

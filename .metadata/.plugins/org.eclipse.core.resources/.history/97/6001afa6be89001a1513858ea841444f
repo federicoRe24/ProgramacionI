@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+   /* Implementar la función reemplazar_byte(), con el prototipo que se muestra abajo. La función recibe un entero t, un número de byte n,
+   y un entero no signado de 8 bits. La función reemplaza el n-ésimo byte del entero t, con el byte b recibido. */
+
+   // Precondición: n es un número positivo mayor o igual a 0 y menor a 4.
+   //uint32_t reemplazar_byte (uint32_t t, int n, uint8_t b){
+
+
+   }
+
+  /* Ejemplos del funcionamiento de reemplazar_byte():
+   reemplazar_byte(0x00303456, 2, 0xcd) --> 0x00cd3456
+   reemplazar_byte(0xb00710ad, 0, 0x07) --> 0xb0071007
+   reemplazar_byte(0xcafecafe, 3, 0xca) --> 0xcafecafe (no hubo cambios) */
+
+
+
+int main() {
+
+	// printf() displays the string inside quotation
+
+   return 0;
+}

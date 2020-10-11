@@ -1,0 +1,47 @@
+/*
+ * opcionesDeUsuario.h
+ *
+ *  Created on: 21 sep. 2019
+ *      Author: brian
+ */
+
+#ifndef OPCIONESDEUSUARIO_H_
+#define OPCIONESDEUSUARIO_H_
+
+#include "estructuraDeMetrobus.h"
+#include <string>
+
+const std::string MENSAJE_DE_BIENVENIDA = "*** BIENVENIDO A CIUDAD DIGITAL V1.0 ***";
+const std::string MENSAJE1 = "Ingrese una opcion de filtrado: 1- por longitud, 2- por latitud,"
+							 " 3- por ID exacto, 4- finalizar: ";
+const std::string MENSAJE2 = "El valor ingresado es incorrecto. Por favor intente nuevamente";
+const std::string MENSAJE3 = "Ingrese el valor de inicio de rango: ";
+const std::string MENSAJE4 = "Ingrese valor de final de rango: ";
+const std::string MENSAJE5 = "Desea imprimir los casos encontrados?";
+const std::string MENSAJE6 = "Ingrese 1 para si, o 2 para no: ";
+const std::string MENSAJE7 = "Ingrese el valor de Id: ";
+const std::string MENSAJE_DE_DESPEDIDA = "*** GRACIAS POR UTILIZAR CIUDAD DIGITAL V1.0***";
+
+//Recibe array con informacion de estaciones de metrobus y le muestra al usuario opciones de filtrado
+void menuDeUsuario(EstacionesDeMetrobus array[]);
+
+//Recibe un string que se muestra por pantalla
+void mostrarMensaje(std::string mensaje);
+
+//Filtra las estaciones de metrobus cuyas longitudes esten dentro de un rango. Muestra cantidad de casos y da la opcion de mostrar las estaciones
+void filtrarPorLongitud(EstacionesDeMetrobus array[]);
+
+//Filtra las estaciones de metrobus cuyas latitudes esten dentro de un rango. Muestra cantidad de casos y da la opcion de mostrar las estaciones
+void filtrarPorLatitud(EstacionesDeMetrobus array[]);
+
+//Filtra las estaciones de metrobus por un valor exacto de identificacion. Muestra cantidad de casos y la estacion si existe
+void filtrarPorId(EstacionesDeMetrobus array[]);
+
+//Recorre un array de estaciones y muestra cada una de ellas
+void mostrarCasosEncontrados(EstacionesDeMetrobus array[], int contador);
+
+//Muestra al usuario la opcion de imprimir las estaciones filtradas
+void impresionDeDatosFiltrados(EstacionesDeMetrobus array[], int contador);
+
+
+#endif /* OPCIONESDEUSUARIO_H_ */

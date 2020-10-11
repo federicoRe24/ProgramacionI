@@ -1,0 +1,8 @@
+4)Contratarunapublicidad:​Selistarantodaslaspantallasyselepediráalusuarioqueelijalapantalladondesequierepublicar,ingresandosuID.
+Luegosepediránlosdatosasociadosalapublicidad:cuitdelcliente,cantidaddedíasqueduralapublicaciónynombre​​del​​archivo​​de​​video​​(p.ej.​​Video1.avi).
+
+5)Modificarcondicionesdepublicación:​Sepediráqueseingreseelcuitdelclienteyselistarantodaslaspantallasdevideoqueelclientetienecontratadas
+mostrandotodossuscampos.LuegodeingresarelIDdelapantalla,sepermitirámodificarlacantidaddedíascontratados​​para​​la​​misma.
+
+6)Cancelarcontratación:​Sepediráqueseingreseelcuitdelclienteyselistarantodaslaspantallasdevideoqueelclientetienecontratadasmostrandotodossus
+campos.Luegoingresar​​el​​ID​​de​​la​​pantalla​​de​​la​​cual​​se​​quiere​​cancelar​​la​​contratación.

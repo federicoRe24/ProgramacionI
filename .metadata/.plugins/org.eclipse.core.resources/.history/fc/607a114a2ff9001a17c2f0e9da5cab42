@@ -1,0 +1,27 @@
+/*1) Se tiene el siguiente array de variables del tipo int
+int numeros[12]={3,7,4,5,2,3,7,1,7,3,2,7};
+Hacer una funcion que reciba el array y su tamaño, y lo imprima. Escribir un programa para probar la funcion.*/
+
+<stdio.h>
+
+#include "clase8.h"
+
+void imprimirArray(int array[], int len)
+{
+	int indice;
+
+	for(indice=0 ; indice<(len)  ; indice++)
+	{
+		printf("%d ", array[indice]);
+	}
+	printf("\n");
+}
+
+int clase8(void)
+{
+	int numeros[12]={3,7,4,5,2,3,7,1,7,3,2,7};
+
+	imprimirArray(numeros, 12);
+
+	return 0;
+}

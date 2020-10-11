@@ -1,0 +1,17 @@
+/*
+ * clase8.h
+ *
+ *  Created on: 17 sept. 2020
+ *      Author: totinho91
+ */
+
+#ifndef SRC_CLASE8_H_
+#define SRC_CLASE8_H_
+
+void clase8(void);
+//int imprimirArray(int *pArray, int len);
+int imprimirArray(int pArray[], int len);
+int contarSietes(int pArray[], int len);
+int cantidadSietes(int pArray[], int len, int *pResultado);
+
+#endif /* SRC_CLASE8_H_ */

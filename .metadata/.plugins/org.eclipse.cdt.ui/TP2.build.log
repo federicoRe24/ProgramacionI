@@ -1,0 +1,86 @@
+20:47:09 **** Incremental Build of configuration Debug for project TP2 ****
+make all 
+Building file: ../src/DibujarRecorrido.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/DibujarRecorrido.d" -MT"src/DibujarRecorrido.o" -o "src/DibujarRecorrido.o" "../src/DibujarRecorrido.cpp"
+Finished building: ../src/DibujarRecorrido.cpp
+ 
+Building file: ../src/EasyBMP.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/EasyBMP.d" -MT"src/EasyBMP.o" -o "src/EasyBMP.o" "../src/EasyBMP.cpp"
+../src/EasyBMP.cpp: In member function ‘bool BMP::ReadFromFile(const char*)’:
+../src/EasyBMP.cpp:994:13: warning: unused variable ‘ZeroWORD’ [-Wunused-variable]
+    ebmpWORD ZeroWORD;
+             ^
+Finished building: ../src/EasyBMP.cpp
+ 
+Building file: ../src/EasyBMP_Font.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/EasyBMP_Font.d" -MT"src/EasyBMP_Font.o" -o "src/EasyBMP_Font.o" "../src/EasyBMP_Font.cpp"
+../src/EasyBMP_Font.cpp: In function ‘int PrintString(BMP&, char*, int, int, int, RGBApixel)’:
+../src/EasyBMP_Font.cpp:31:35: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for( CharNumber = 0 ; CharNumber < strlen( String ) ; CharNumber++ )
+                                   ^
+../src/EasyBMP_Font.cpp: In function ‘int PrintLetter(BMP&, char, int, int, int, RGBApixel)’:
+../src/EasyBMP_Font.cpp:426:10: warning: variable ‘MaxAngle2’ set but not used [-Wunused-but-set-variable]
+   double MaxAngle2 = pi;
+          ^
+../src/EasyBMP_Font.cpp:976:7: warning: unused variable ‘x6’ [-Wunused-variable]
+   int x6 = x3;
+       ^
+../src/EasyBMP_Font.cpp:977:7: warning: unused variable ‘y6’ [-Wunused-variable]
+   int y6 = y1;
+       ^
+../src/EasyBMP_Font.cpp:1053:7: warning: unused variable ‘x6’ [-Wunused-variable]
+   int x6 = x3;
+       ^
+../src/EasyBMP_Font.cpp:1054:7: warning: unused variable ‘y6’ [-Wunused-variable]
+   int y6 = y1;
+       ^
+../src/EasyBMP_Font.cpp:1661:7: warning: unused variable ‘TempRad’ [-Wunused-variable]
+   int TempRad = (TempWidth-1)/2;
+       ^
+../src/EasyBMP_Font.cpp:1679:7: warning: unused variable ‘TempRad’ [-Wunused-variable]
+   int TempRad = (TempWidth-1)/2;
+       ^
+../src/EasyBMP_Font.cpp:1826:7: warning: unused variable ‘TempRad’ [-Wunused-variable]
+   int TempRad = (TempWidth-1)/2;
+       ^
+../src/EasyBMP_Font.cpp:1975:7: warning: unused variable ‘x3’ [-Wunused-variable]
+   int x3 = ebmpRound(TopLeftX+0.5*Height);
+       ^
+../src/EasyBMP_Font.cpp:1976:7: warning: unused variable ‘y3’ [-Wunused-variable]
+   int y3 = ebmpRound(y2);
+       ^
+../src/EasyBMP_Font.cpp:1978:7: warning: unused variable ‘x4’ [-Wunused-variable]
+   int x4 = TopLeftX;
+       ^
+../src/EasyBMP_Font.cpp:1979:7: warning: unused variable ‘y4’ [-Wunused-variable]
+   int y4 = ebmpRound(y1);
+       ^
+../src/EasyBMP_Font.cpp:47:12: warning: variable ‘TempColor’ set but not used [-Wunused-but-set-variable]
+  RGBApixel TempColor;
+            ^
+../src/EasyBMP_Font.cpp: In function ‘int PrintCopyright(BMP&, int, int, int, RGBApixel)’:
+../src/EasyBMP_Font.cpp:2166:6: warning: unused variable ‘CharNumber’ [-Wunused-variable]
+  int CharNumber = 0;
+      ^
+Finished building: ../src/EasyBMP_Font.cpp
+ 
+Building file: ../src/EasyBMP_Geometry.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/EasyBMP_Geometry.d" -MT"src/EasyBMP_Geometry.o" -o "src/EasyBMP_Geometry.o" "../src/EasyBMP_Geometry.cpp"
+../src/EasyBMP_Geometry.cpp: In function ‘void DrawArc(BMP&, double, double, double, double, double, RGBApixel)’:
+../src/EasyBMP_Geometry.cpp:262:9: warning: unused variable ‘dTheta’ [-Wunused-variable]
+  double dTheta = 1.0/TempRadius;
+         ^
+Finished building: ../src/EasyBMP_Geometry.cpp
+ 
+Building target: TP2
+Invoking: GCC C++ Linker
+g++  -o "TP2"  ./src/Camino.o ./src/DibujarRecorrido.o ./src/EasyBMP.o ./src/EasyBMP_Font.o ./src/EasyBMP_Geometry.o ./src/Estaciones.o ./src/Garaje.o ./src/buscarCamino.o ./src/lectura.o ./src/main.o   
+Finished building target: TP2
+ 
+
+20:47:11 Build Finished. 0 errors, 17 warnings. (took 1s.569ms)
+

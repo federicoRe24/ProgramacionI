@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+
+int main() {
+
+	int numero1;
+	int numero2;
+	int resultado;
+
+	printf("Numero 1? ");
+	scanf("%d", numero1); /* TIPOS int %d - float %f - char %c */
+
+   return 0;
+}

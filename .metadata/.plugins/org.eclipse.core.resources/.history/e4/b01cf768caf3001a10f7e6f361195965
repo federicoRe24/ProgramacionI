@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 8
+
+int main(void)
+{
+	int var=9;
+	int numeros[SIZE];
+	int indice;
+
+	numeros[0] = 8;
+	numeros[1] = 2;
+	numeros[2] = 3;
+	numeros[3] = 1;
+	numeros[4] = 9;
+	numeros[5] = 5;
+	numeros[6] = 8;
+	numeros[7] = 7;
+
+	ordenar(numeros,SIZE);
+}
+
+//minimo indice 0
+// maximo indice 7
+
+void ordenar(int array[], int len)
+{
+	int indice;
+	// 8 2 3 1 9 5 8 7
+
+	if(array[0] > array[1])
+	{
+		int aux;
+		// intercambiar (swap)
+		aux = array[indice];
+		array[indice] = array[indice+1];
+		array[indice+1] = aux;
+	}
+
+
+	for(indice=0; indice<len; indice++)
+	{
+
+
+	}
+}

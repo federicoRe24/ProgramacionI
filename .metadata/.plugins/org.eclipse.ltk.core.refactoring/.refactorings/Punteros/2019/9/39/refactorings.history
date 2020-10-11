@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Punteros/src/ejercicio1&apos; to &apos;ejercicio1.cpp&apos;" description="Rename resource &apos;ejercicio1&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/ejercicio1" name="ejercicio1.cpp" stamp="1569520455010" updateReferences="true"/>
+</session>

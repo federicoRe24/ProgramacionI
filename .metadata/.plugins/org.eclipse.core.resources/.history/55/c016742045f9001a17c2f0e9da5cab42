@@ -1,0 +1,152 @@
+
+#include <stdio.h>
+#include "clase8.h"
+
+void clase8(void)
+{
+	int numeros[12]={3,7,4,5,2,3,7,1,7,3,2,7};
+	int contadorSietes;
+	int retorno;
+
+	imprimirArray(numeros, 12);
+	contarSietes(numeros, 12);
+	cantidadSietes(numeros, 12, &contadorSietes);
+
+	printf("La cantidad de sietes que contó la funcion es %d\n", contadorSietes);
+
+	char nombre[8]={'p','e','p','e','1','2','3','\0'};
+	cantidadDeLetraE(nombre);
+
+	retorno = letraValida(nombre);
+	printf('%d',retorno);
+}
+
+/*1) Se tiene el siguiente array de variables del tipo int
+int numeros[12]={3,7,4,5,2,3,7,1,7,3,2,7};
+Hacer una funcion que reciba el array y su tamaño, y lo imprima. Escribir un programa para probar la funcion.*/
+
+// Le paso el len para que la función sepa hasta dónde llega el array
+int imprimirArray(int pArray[], int len)
+{
+	int retorno = -1;
+	int indice;
+
+	if(pArray!=NULL && len>0)
+	{
+	for(indice=0 ; indice<(len)  ; indice++)
+	{
+		printf("%d ", pArray[indice]);
+	}
+	printf("\n");
+	retorno = 0;
+	}
+
+	return retorno;
+}
+
+/* 2) Hacer una funcion que reciba el array del punto 1 y su tamaño, y cuente cuantas veces aparece el numero 7. Al terminar de contar,
+ * la funcion deberá imprimir por pantalla el valor contado. Escribir un programa para probar la funcion.
+ */
+
+int contarSietes(int pArray[], int len)
+{
+	int retorno = -1;
+	int indice;
+	int cantidadSietes = 0;
+
+	if(pArray!=NULL && len>0)
+	{
+	for(indice=0 ; indice<(len)  ; indice++)
+	{
+		if(pArray[indice] == 7)
+		{
+			cantidadSietes ++;
+		}
+	}
+	printf("La cantidad de veces que aparece el 7 en el array es %d\n", cantidadSietes);
+	retorno = 0;
+	}
+
+	return retorno;
+}
+
+/*3) Modificar la funcion del punto 2 para que NO imprima el valor contado, sino que lo devuelva por referencia (recibiendo la direccion de
+ * memoria de una variable donde escribirá el valor contado). Escribir un programa para probar la funcion.
+ */
+
+int cantidadSietes(int pArray[], int len, int *pResultado)
+{
+	int retorno = -1;
+	int indice;
+	int cantidadSietes = 0;
+
+	if(pArray!=NULL && len>0 && pResultado!=NULL)
+	{
+	for(indice=0 ; indice<(len)  ; indice++)
+	{
+		if(pArray[indice] == 7)
+		{
+			cantidadSietes ++;
+		}
+	}
+	*pResultado = cantidadSietes;
+	retorno = 0;
+	}
+
+	return retorno;
+}
+
+/*4) Dada la siguiente cadena de caracteres:
+char nombre[8]={'p','e','p','e','1','2','3','\0'};
+Hacer una funcion que reciba el array y su tamaño, y cuente cuantas veces aparece la letra 'e'.Al terminar de contar, la funcion deberá
+imprimir por pantalla el valor contado. Escribir un programa para probar la funcion.*/
+
+
+int cantidadDeLetraE(char pArray[])
+{
+	int retorno = -1;
+	int i=0;
+	int contadorLetraE = 0;
+
+	if(pArray!=NULL)
+	{
+		//for(indice=0 ; indice<(len)  ; indice++)
+		while(pArray[i]!='\0')
+		{
+			if(pArray[i] == 'e')
+			{
+				contadorLetraE ++;
+			}
+			i++;
+		}
+		printf("La cantidad de veces aparece que la 'e' en el array es %d\n", contadorLetraE);
+		retorno = 0;
+	}
+	return retorno;
+}
+
+/*5) Hacer una funcion que reciba el array del punto 4, y verifique que las letras dentro del mismo esten en el rango de 'a' a 'z' o de 'A' a
+ * 'Z'. Si estan dentro del rango la funcion deberá devolver por valor(usando el return) un 0, de lo contrario devolverá -1.
+ */
+
+int letraValida(char* cadena)
+{
+	int respuesta = 1; // TODO OK
+	int i = 0;
+	while(cadena[i]!='\0')
+	{
+		// Uso los intervalos <----- A - Z -------> Esta mal
+		if((cadena[i] < 'A' || cadena[i] > 'Z') &&
+		   (cadena[i] < 'a' || cadena[i] > 'z'))
+		{
+			respuesta = 0;
+			break;
+		}
+		i++;
+	}
+	return respuesta;
+}
+
+
+
+

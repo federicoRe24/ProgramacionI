@@ -1,0 +1,29 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "clase7.h"
+#define LONG_NOMBRE 50
+
+void clase7(void)
+{
+	char nombre[5];
+	char nombre2[6] = "JUANA";
+	int resultadoCmp;
+
+	strncpy(nombre,nombre2,sizeof(nombre)); //nombre = nombre2; --> MAL
+	printf("%s",nombre);
+	resultadoCmp = strnicmp(nombre,nombre2,LONG)
+	if(resultadoCmp == 0)
+	{
+		printf("SON IGUALES");
+	}
+	else if(resultadoCmp > 0)
+	{
+		printf("El primero es mas grande");
+	}
+	else
+	{
+		printf("El segundo es mas grande");
+	}
+}

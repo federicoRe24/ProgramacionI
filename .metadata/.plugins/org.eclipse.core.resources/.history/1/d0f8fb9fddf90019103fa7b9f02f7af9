@@ -1,0 +1,54 @@
+#include "EasyBMP.h"
+#include "EasyBMP_Geometry.h"
+#include "EasyBMP_Font.h"
+#include "AdditionalSource.h"
+
+using namespace std;
+
+int main(){
+
+	BMP AnImage;
+	// Set size to 1024,768
+	//AnImage.SetSize(1024,768);
+	// Set its color depth to 24-bits
+	//AnImage.SetBitDepth(24);
+
+	AnImage =
+
+	// Cambiar color imagen
+	//AnImage(14,18)->Red	= 50;
+	//AnImage(14,18)->Green = 50;
+	//AnImage(14,18)->Blue = 192;
+	//AnImage(14,18)->Alpha = 0;
+
+	for(int i = 0; i < 300; i++){
+
+		AnImage(i,i)->Red	= 50;
+		AnImage(i,i)->Green = 50;
+		AnImage(i,i)->Blue = 192;
+		AnImage(i,i)->Alpha = 0;
+	}
+
+	for(int i = 300; i < 700; i++){
+
+		AnImage(300,i)->Red	= 50;
+		AnImage(300,i)->Green = 50;
+		AnImage(300,i)->Blue = 192;
+		AnImage(300,i)->Alpha = 0;
+	}
+
+	for(int i = 300; i < 768; i++){
+
+		AnImage(i,700)->Red	= 50;
+		AnImage(i,700)->Green = 50;
+		AnImage(i,700)->Blue = 192;
+		AnImage(i,700)->Alpha = 0;
+	}
+
+	// Guardar Imagen
+	AnImage.WriteToFile("sample.bmp");
+
+	return 0;
+}
+
+

@@ -1,0 +1,30 @@
+#include "memoriaDinamica.h"
+#include <iostream>
+
+void ejemplo()
+{
+
+	int *p; // Puntero a entero p.
+
+	p=new int; // Solicita memoria del heap de tamaño suficiente como para que se almacene un entero.
+
+	/* Este espacio de memoria se manipulará desde p (notar que no tiene un identificador propio).
+	Observar que la variable puntero p es estática, es decir, está en el Segmento de Datos, pero el espacio que se obtuvo mediante new
+	corresponde al heap, que es memoria dinámica. La memoria dinámica se gestiona en tiempo de ejecución. */
+
+	*p=3; // almacena 3 en el espacio de memoria generado, y cuya dirección está en p.
+
+    // El manejo de la ‘memoria dinámica’ permite extender el espacio que el programa utiliza para datos, de la manera más eficiente.
+
+	std::cout << p << std::endl;
+	std::cout << *p << std::endl;
+
+	delete p; // libera la memoria del heap cuya dirección estaba almacenada en p.
+
+	std::cout << p << std::endl;
+	std::cout << *p << std::endl;
+}
+
+
+
+

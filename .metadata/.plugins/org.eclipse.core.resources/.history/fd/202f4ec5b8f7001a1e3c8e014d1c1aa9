@@ -1,0 +1,124 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <limits.h>
+#include "clase7.h"
+#define LONG_NOMBRE 50
+
+int getNombre(char* mensaje, char* mensajeError, char*pResultado, int reintentos, int limite);
+
+void clase7(void)
+{
+	char nombre[5];
+	char nombre2[6] = "JUANA";
+	int resultadoCmp;
+
+	strncpy(nombre,nombre2,sizeof(nombre)); //nombre = nombre2; --> MAL
+	printf("%s",nombre);
+	//resultadoCmp = strnicmp(nombre,nombre2,LONG_NOMBRE-1); // strncpm no funciona en linux ?
+	resultadoCmp = strncasecmp(nombre,nombre2,LONG_NOMBRE-1);
+	if(resultadoCmp == 0)
+	{
+		printf("SON IGUALES");
+	}
+	else if(resultadoCmp > 0)
+	{
+		printf("El primero es mas grande");
+	}
+	else
+	{
+		printf("El segundo es mas grande");
+	}
+
+	// No usar funciones de la libreria string.h que no lleven límite
+	resultadoCmp = strnlen(nombre,LONG_NOMBRE-1);
+
+	//sprintf(nombre,"%fhola%d",2.22,10,"HOLA "); //Recibe donde queres guardar el string, una mascara, etc. Sirve para crear strings (?)
+
+	snprintf(nombre,LONG_NOMBRE-1,"%fhola%d",2.22,10,"HOLA ");
+	printf("%s",nombre);
+
+	// nombre es un array de char, me da la direccion de memoria del primer elemento poner el *
+	if(getNombre("\nNombre?,\nError",nombre,2,LONG_NOMBRE-1) == 0)
+	{
+		printf("s", nombre);
+	}
+	else
+	{
+		printf("TODO MAL");
+	}
+}
+
+/*
+* \brief - Solicita un entero al usuario
+ * \param char* mensaje, Es el mensaje a ser mostrado al usuario
+ * \param char* mensaje, Es el mensaje de error a ser mostrado al usuario
+ * \param int* pResultado, puntero al espacio de memoria donde se dejara el valor obtenido
+ * \param int reintentos, cantidad de oportunidades para ingresar el dato
+ * \param int minimo, valor minimo admitido
+ * \param int maximo, valor maximo admitido
+ * \return (-1) Error / (0) Ok
+ */
+
+int getNombre(char* mensaje, char* mensajeError, char*pResultado, int reintentos, int limite)
+{
+	char bufferString[4096]; // variable grande para que el usuario no pueda volcarla.
+	int resultadoScanf;
+	int retorno;
+	if(		mensaje != NULL &&
+			mensajeError != NULL &&
+			pResultado != NULL &&
+			reintentos >= 0 &&
+			limite > 0)
+	{
+		do
+		{
+			print("%s", mensaje);
+			__ffpurge(stdin);
+			resultadoScanf = scanf("%s", bufferString);
+			if(resultadoScanf == 1 && strlen(bufferString,sizeof(bufferString)-1)<= limite && esUnNombreValido(bufferString,limite) != 0)
+			{
+				retorno = 0;
+				// pResultado = bufferString; --> no existe en C
+				//strncpy(pResultado,bufferString,)
+				break;
+			}
+			else
+			{
+				//Error
+				printf("%s",mensajeError);
+				reintentos --;
+			}
+		}while(reintentos >= 0);
+
+		return retorno;
+	}
+}
+
+/*
+* \brief - Verifica una cadena recibida como parámetro para determinar si es un nombre válido
+ * \param char* cadena, la cadena a analizar
+ * \param int limite, indica la cantidad de letras maxima de la cadena
+ * \return (0) Indicar que no es un nombre valido / (1) Indica que es un nombre valido
+ */
+
+
+int esUnNombreValido(char* cadena, int limite)
+{
+	int respuesta = 1; // TODO OK
+	//Uso for porque se ejecuta al menos una vez y porque tiene limite
+	for(int i = 0;i<limite && cadena[i] != '\0' ;i++) //En \0 termina el array
+	{
+		// Uso los intervalos <----- A - Z -------> Esta mal
+		if((cadena[i] < 'A' || cadena[i] > 'Z') &&
+		   (cadena[i] < 'a' || cadena[i] > 'z') &&
+		   cadena[i] != '.')
+		{
+			respuesta = 0;
+			break;
+		}
+	}
+	return respuesta;
+}

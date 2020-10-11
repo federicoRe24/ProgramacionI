@@ -1,0 +1,13 @@
+
+#include <stdio.h>
+
+
+int clase7(void)
+{
+	char nombre[5];
+	char nombre2[6] = "JUANA";
+
+
+
+	return 0;
+}

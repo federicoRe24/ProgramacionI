@@ -1,0 +1,15 @@
+/*
+ * clase8.h
+ *
+ *  Created on: 17 sept. 2020
+ *      Author: totinho91
+ */
+
+#ifndef SRC_CLASE8_H_
+#define SRC_CLASE8_H_
+
+void imprimirArray(int array[], int len);
+
+
+
+#endif /* SRC_CLASE8_H_ */

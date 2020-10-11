@@ -1,0 +1,13 @@
+
+#include <stdio.h>
+
+
+int clase7(void)
+{
+	char nombre[5];
+	char nombre2[6] = "JUANA";
+
+	strncpy(nombre,nombre2,sizeof(nombre)); //nombre = nombre2; --> MAL
+
+	return 0;
+}

@@ -1,0 +1,14 @@
+22:56:08 **** Incremental Build of configuration Debug for project Pruebas C ****
+make all 
+Building file: ../src/main.c
+Invoking: Cross GCC Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:10:4: error: expected identifier or ‘(’ before ‘}’ token
+    }
+    ^
+src/subdir.mk:18: recipe for target 'src/main.o' failed
+make: *** [src/main.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+
+22:56:09 Build Failed. 3 errors, 0 warnings. (took 1s.19ms)
+
