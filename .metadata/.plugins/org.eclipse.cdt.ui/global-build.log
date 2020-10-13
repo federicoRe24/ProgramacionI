@@ -1,20 +1,15 @@
-21:49:24 **** Incremental Build of configuration Debug for project ProgramaciónI ****
+16:35:00 **** Incremental Build of configuration Debug for project PrimerParcialLabo ****
 make all 
-Building file: ../src/Clase12.c
+Building file: ../src/publicacion.c
 Invoking: GCC C Compiler
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Clase12.d" -MT"src/Clase12.o" -o "src/Clase12.o" "../src/Clase12.c"
-Finished building: ../src/Clase12.c
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/publicacion.d" -MT"src/publicacion.o" -o "src/publicacion.o" "../src/publicacion.c"
+Finished building: ../src/publicacion.c
  
-Building file: ../src/contratacion.c
-Invoking: GCC C Compiler
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/contratacion.d" -MT"src/contratacion.o" -o "src/contratacion.o" "../src/contratacion.c"
-Finished building: ../src/contratacion.c
- 
-Building target: ProgramaciónI
+Building target: PrimerParcialLabo
 Invoking: GCC C Linker
-gcc  -o "ProgramaciónI"  ./src/Clase12.o ./src/Clase13.o ./src/alumno.o ./src/calculosArray.o ./src/contratacion.o ./src/main.o ./src/pantalla.o ./src/utn.o   
-Finished building target: ProgramaciónI
+gcc  -o "PrimerParcialLabo"  ./src/ArrayClientes.o ./src/main.o ./src/publicacion.o ./src/utn.o   
+Finished building target: PrimerParcialLabo
  
-21:49:30 **** Incremental Build of configuration Debug for project ProgramaciónI ****
+16:35:05 **** Incremental Build of configuration Debug for project PrimerParcialLabo ****
 make all 
 make: Nothing to be done for 'all'.

@@ -1,19 +1,6 @@
-21:46:32 **** Incremental Build of configuration Debug for project Clase4 ****
+13:55:24 **** Incremental Build of configuration Debug for project Clase4 ****
 make all 
-Building file: ../src/main.c
-Invoking: GCC C Compiler
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
-../src/main.c: In function ‘getFloat’:
-../src/main.c:121:2: warning: implicit declaration of function ‘__fpurge’ [-Wimplicit-function-declaration]
-  __fpurge(stdin);
-  ^
-Finished building: ../src/main.c
- 
-Building target: Clase4
-Invoking: GCC C Linker
-gcc  -o "Clase4"  ./src/main.o   
-Finished building target: Clase4
- 
+make: Nothing to be done for 'all'.
 
-21:46:33 Build Finished. 0 errors, 1 warnings. (took 921ms)
+13:55:24 Build Finished. 0 errors, 0 warnings. (took 620ms)
 
