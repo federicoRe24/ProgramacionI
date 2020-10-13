@@ -21,8 +21,10 @@ typedef struct
 int initPublicaciones(Publicacion* list, int len);
 int publicacion_alta(Cliente *pCliente, int limiteCliente, Publicacion *pPublicacion, int limitePublicacion);
 int publicacion_imprimirArray(Publicacion *array, int limite);
+int publicacion_imprimirPorCliente(Publicacion *array, int limite, int idCliente);
 int publicacion_buscarId(Publicacion *array, int limite,int valorBuscado);
 int publicacion_pausar(Publicacion *array, int limite, int id);
+int publicacion_reanudar(Publicacion *array, int limite, int id);
 int publicacion_borrar(Publicacion *array, int limite, int id);
 
 #endif /* SRC_PUBLICACION_H_ */

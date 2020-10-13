@@ -85,6 +85,24 @@ int publicacion_imprimirArray(Publicacion *array, int limite)
 	return retorno;
 }
 
+int publicacion_imprimirPorCliente(Publicacion *array, int limite, int idCliente)
+{
+	int retorno = -1;
+	if(array !=NULL && limite>0 && idCliente > 0)
+	{
+		retorno=0;
+		for(int i=0;i<limite;i++)
+		{
+			if(array[i].idCliente == idCliente && array[i].isEmpty == FALSE)
+			{
+				printf("idPublicacion: %d, N° Rubro: %d, Aviso: %s, idCliente: %d\n",array[i].idPublicacion, array[i].numeroRubro, array[i].textoAviso,
+						array[i].idCliente);
+			}
+		}
+	}
+	return retorno;
+}
+
 static int generarIdNuevo(void)
 {
 	static int id=0; //es global pero solo la funcion puede usarla, es como si estuviese arriba. s einicializa en 0 solo una vez
@@ -189,10 +207,10 @@ int publicacion_borrar(Publicacion *array, int limite, int id)
 	int retorno = -1;
 	int auxiliarId;
 	int indice;
-	if(utn_getNumero("indique id de cliente a eliminar", "id invalido", &auxiliarId, 2, 0,limite)==0)
+	if(getInt("indique id de cliente a eliminar", "id invalido", &auxiliarId, 2, 0,limite)==0)
 	{
-		contratacion_imprimirArray(array, CANTIDAD_CONTRATACIONES);
-		indice = contratacion_buscarId(array, CANTIDAD_CONTRATACIONES, auxiliarId);
+		//contratacion_imprimirArray(array, CANTIDAD_CONTRATACIONES);
+		//indice = contratacion_buscarId(array, CANTIDAD_CONTRATACIONES, auxiliarId);
 		if(array !=NULL && limite>0 && indice >= 0 && array[indice].isEmpty==0)
 		{
 				array[indice].isEmpty= 1;

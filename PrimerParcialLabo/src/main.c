@@ -5,6 +5,7 @@
 #include "publicacion.h"
 #include "utn.h"
 #define ELEMENTOS_ARRAY 10
+#define MAX_ID 1000
 
 
 int main(void)
@@ -12,7 +13,7 @@ int main(void)
 	int opcion;
 	int respuesta;
 	int primeraCarga = 1;
-	int id;
+	int auxiliarId;
 	Cliente arrayClientes[ELEMENTOS_ARRAY];
 	initClientes(arrayClientes, ELEMENTOS_ARRAY);
 	Publicacion arrayPublicaciones[ELEMENTOS_ARRAY];
@@ -54,7 +55,19 @@ int main(void)
 					}
 					else
 					{
-						//Pedir ID acá, imprimir los clientes desde acá, borrar las publis y luego el cliente
+						// Dar de baja primero las publicaciones y luego el cliente
+						if(getInt("indique id de cliente a eliminar", "id invalido", &auxiliarId, 2, MAX_ID, 0)==0)
+						{
+							if(findClienteById(arrayClientes, ELEMENTOS_ARRAY, auxiliarId) != -1)
+							{
+								publicacion_imprimirPorCliente(arrayPublicaciones, ELEMENTOS_ARRAY, auxiliarId);
+							}
+							else
+							{
+								printf("No se encontró un cliente con el id solicitado\n");
+							}
+						}
+
 						if(BorrarCliente(arrayClientes, ELEMENTOS_ARRAY) == 0)
 						{
 							primeraCarga = 1;
@@ -78,8 +91,15 @@ int main(void)
 					}
 					else
 					{
-						id = Getid(); // hacer
-						publicacion_pausar(arrayPublicaciones, ELEMENTOS_ARRAY, id);
+						if(getInt("Indique id de la publicación a pausar", "id invalido", &auxiliarId, 2, MAX_ID, 0)==0)
+						{
+							publicacion_pausar(arrayPublicaciones, ELEMENTOS_ARRAY, auxiliarId);
+						}
+						else
+						{
+							printf("No se ingresó un id válido\n");
+						}
+
 					}
 					break;
 				case 6:
@@ -89,8 +109,14 @@ int main(void)
 					}
 					else
 					{
-						id = Getid(); // hacer
-						publicacion_reanudar(arrayPublicaciones, ELEMENTOS_ARRAY, id);
+						if(getInt("Indique id de la publicación a reanudar", "id invalido", &auxiliarId, 2, MAX_ID, 0)==0)
+						{
+							publicacion_reanudar(arrayPublicaciones, ELEMENTOS_ARRAY, auxiliarId);
+						}
+						else
+						{
+							printf("No se ingresó un id válido\n");
+						}
 					}
 					break;
 				case 7:
@@ -100,8 +126,7 @@ int main(void)
 					}
 					else
 					{
-						id = Getid(); // hacer
-						publicacion_reanudar(arrayPublicaciones, ELEMENTOS_ARRAY, id);
+						publicacion_imprimirArray(arrayPublicaciones, ELEMENTOS_ARRAY);
 					}
 					break;
 				case 8:

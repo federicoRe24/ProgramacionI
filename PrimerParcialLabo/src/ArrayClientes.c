@@ -195,22 +195,22 @@ int printClientes(Cliente* list, int len)
 * \return int
 *
 */
+
+/*
 int printCliente(Cliente* list, int len, int id)
 {
 	int retorno = -1;
 	if(list != NULL && len > 0 && id > 0)
 	{
-		for(int i=0;i<len;i++)
+		if(list[i].isEmpty == FALSE)
 		{
-			if(list[i].isEmpty == FALSE)
-			{
-				printf("Id: %d - Nombre: %s - Apellido: %s - Cuit: %s\n",list[i].id,list[i].name, list[i].lastName,list[i].cuit);
-			}
+			printf("Id: %d - Nombre: %s - Apellido: %s - Cuit: %s\n",list[i].id,list[i].name, list[i].lastName,list[i].cuit);
+		}
 		}
 		retorno = 0;
 	}
 	return retorno;
-}
+}*/
 
 int CargarCliente(Cliente* list, int len)
 {
