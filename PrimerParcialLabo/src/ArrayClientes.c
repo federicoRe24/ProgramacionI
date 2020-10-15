@@ -5,9 +5,6 @@
 
 #include "ArrayClientes.h"
 #include "utn.h"
-#define LONG_NOMBRE 50
-#define SECTORES 10
-#define MAX_ID 1500
 
 static int generarIdNuevo(void);
 
@@ -356,20 +353,50 @@ int altaForzadaClientes(Cliente* list, int len)
 	int retorno = -1;
 	if(	list != NULL && len > 0)
 	{
+		list[0].id = generarIdNuevo();
+		strncpy(list[0].name,"Federico",LONG_NOMBRE);
+		strncpy(list[0].lastName,"Re",LONG_NOMBRE);
+		strncpy(list[0].cuit,"20362214166",LONG_CUIT);
+		list[0].isEmpty = FALSE;
+
+		list[1].id = generarIdNuevo();
+		strncpy(list[1].name,"Juan",LONG_NOMBRE);
+		strncpy(list[1].lastName,"Perez",LONG_NOMBRE);
+		strncpy(list[1].cuit,"18362214165",LONG_CUIT);
+		list[1].isEmpty = FALSE;
+
+		list[2].id = generarIdNuevo();
+		strncpy(list[2].name,"Nicolas",LONG_NOMBRE);
+		strncpy(list[2].lastName,"Gimenez",LONG_NOMBRE);
+		strncpy(list[2].cuit,"25362214160",LONG_CUIT);
+		list[2].isEmpty = FALSE;
+
+		retorno = 0;
+	}
+	return retorno;
+}
+
+/** \brief indicates if there's at least one Cliente loaded on the array
+* \param list Cliente*
+* \param len int
+* \oara id int
+* \return int Return (-1) if Error [Invalid length or NULL pointer or id < 1] - (0) if Ok
+*
+*/
+
+int primerCliente(Cliente* list, int len)
+{
+	int retorno = -1;
+	if(list != NULL && len > 0)
+	{
 		for(int i=0;i<len;i++)
 		{
-			if(list[i].isEmpty == TRUE)
+			if(list[i].isEmpty == FALSE)
 			{
-				list[i].id = generarIdNuevo();
-				strncpy(list[i].name,"Federico",LONG_NOMBRE);
-				strncpy(list[i].lastName,"Re",LONG_NOMBRE);
-				strncpy(list[i].cuit,"20362214166",LONG_CUIT);
-				list[i].isEmpty = FALSE;
-				return 0;
+				retorno = 0;
+				break;
 			}
 		}
 	}
 	return retorno;
 }
-
-

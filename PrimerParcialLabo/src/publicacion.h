@@ -7,7 +7,7 @@
 #define AVISO_LEN 64
 #define ACTIVA 1
 #define PAUSADA 0
-#define MAX_ID 1000
+#define LEN_PUBLICACIONES 1000
 
 typedef struct
 {

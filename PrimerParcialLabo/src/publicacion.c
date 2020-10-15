@@ -49,7 +49,7 @@ int publicacion_alta(Cliente *pCliente, int limiteCliente, Publicacion *pPublica
 		{
 			bufferPublicacion.idCliente = opcion;
 			getInt("Ingrese el número de rubro: ", "Error\n", &bufferPublicacion.numeroRubro,3,10,1);
-			getNombre("Ingrese el texto del aviso (hasta 64 caracteres): ", "\nError",bufferPublicacion.textoAviso, 2,AVISO_LEN);
+			utn_getChar("Ingrese el texto del aviso (hasta 64 caracteres): ", "\nError",bufferPublicacion.textoAviso, 3,AVISO_LEN);
 			//utn_getString("Ingrese el nombre del video", "Error\n", bufferPublicacion.nombreVideo, 2,NOMBRE_LEN);
 		}
 		for(int i=0;i<limitePublicacion;i++)
@@ -79,7 +79,7 @@ int publicacion_imprimirArray(Publicacion *array, int limite)
 		{
 			if(array[i].isEmpty == FALSE && array[i].estado == ACTIVA)
 			{
-				printf("idPublicacion: %d, N° Rubro: %d, Aviso: %s, idCliente: %d\n",array[i].idPublicacion, array[i].numeroRubro, array[i].textoAviso,
+				printf("idPublicacion: %d - N° Rubro: %d - Aviso: %s - idCliente: %d\n",array[i].idPublicacion, array[i].numeroRubro, array[i].textoAviso,
 						array[i].idCliente);
 			}
 		}
@@ -97,7 +97,7 @@ int publicacion_imprimirPorCliente(Publicacion *array, int limite, int idCliente
 		{
 			if(array[i].idCliente == idCliente && array[i].isEmpty == FALSE)
 			{
-				printf("idPublicacion: %d, N° Rubro: %d, Aviso: %s, idCliente: %d\n",array[i].idPublicacion, array[i].numeroRubro, array[i].textoAviso,
+				printf("idPublicacion: %d - N° Rubro: %d - Aviso: %s - idCliente: %d\n",array[i].idPublicacion, array[i].numeroRubro, array[i].textoAviso,
 						array[i].idCliente);
 			}
 		}
@@ -277,15 +277,15 @@ int borrarPublicacionesYCliente(Publicacion *arrayPublicaciones, int limitePubli
 	// Dar de baja primero las publicaciones y luego el cliente
 	if(getInt("indique id de cliente a eliminar", "id invalido", &auxiliarId, 2, MAX_ID, 0)==0)
 	{
-		if(findClienteById(arrayClientes, ELEMENTOS_ARRAY, auxiliarId) != -1)
+		if(findClienteById(arrayClientes, LEN_CLIENTES, auxiliarId) != -1)
 		{
-			publicacion_imprimirPorCliente(arrayPublicaciones, ELEMENTOS_ARRAY, auxiliarId);
+			publicacion_imprimirPorCliente(arrayPublicaciones, LEN_PUBLICACIONES, auxiliarId);
 			if(getInt("¿Está seguro que desea eliminar este cliente junto con sus publicaciones?\n1 - Si\n2 - No\n",
 					 "Opción inválida", &respuesta, 3, 2, 1)==0)
 			{
 				if(respuesta == 1)
 				{
-					BorrarCliente(arrayClientes, limiteClientes);
+					removeCliente(arrayClientes, limiteClientes, auxiliarId);
 					publicacion_borrar(arrayPublicaciones, limitePublicaciones, auxiliarId);
 				}
 			}

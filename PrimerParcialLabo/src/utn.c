@@ -5,6 +5,7 @@
 #include "utn.h"
 #define LIMITE_BUFFER_STRING 1000
 static int myGets(char *cadena, int longitud);
+static int isAlphNum(char cadena[]);
 
 
 /*
@@ -209,26 +210,109 @@ int getCuit(char* mensaje, char* mensajeError, char* pResultado,int reintentos, 
 }
 
 /*
-int utn_getNumero (int* pResultado, char* mensaje, char* mensajeError,int minimo, int maximo, int intentos){
-
+* \brief Solicita numeros, letras y espacio al usuario
+* \param char* pMensaje, Es el mensaje mostrado al usuario
+* \param char* pMensajeError, Es el mensaje de error a ser mostrado al usuario
+* \param char* pResultado, puntero al espacio de memoria donde se dejara el valor obtenido
+* \param int reintentos, cantidad de oportunidades para ingresar el dato
+* \param int limite, cantidad de espacio que puede almacenar la variable
+ * return (-1) ERROR / 0 OK
+ */
+int utn_getAlphaNum(char* pMensaje, char* pMensajeError, char* pResultado, int reintentos, int limite)
+{
 	int retorno = -1;
-	int bufferInt;
-	if (pResultado != NULL && mensaje != NULL && mensajeError != NULL && maximo>minimo && intentos>=0) {
-	do {
-		printf("%s\n", mensaje);
-		if (getInt(&bufferInt) == 0 && bufferInt >= minimo && bufferInt <= maximo)
-		{
-		*pResultado = bufferInt;
-		retorno = 0;
-		break;
-		}
-		else
-		{
-		printf("%s \n", mensajeError);
-		intentos--;
-		}
-	} while (intentos >= 0 );
+	char bufferString[LIMITE_BUFFER_STRING];
 
+	if(pMensaje != NULL && pResultado != NULL && pMensajeError != NULL && reintentos >= 0 && limite > 0 )
+	{
+		do
+		{
+			printf("%s", pMensaje);
+			if(	(myGets(bufferString, LIMITE_BUFFER_STRING)== 0) &&
+				(strnlen(bufferString, sizeof(bufferString)-1) <= limite) &&
+				(isAlphNum(bufferString)==1))
+			{
+				strncpy(pResultado, bufferString, limite);
+				retorno = 0;
+				break;
+			}
+			else
+			{
+				printf("%s", pMensajeError);
+				reintentos--;
+			}
+		}while(reintentos >= 0);
+		if(reintentos < 0)
+		{
+			printf("Se quedo sin intentos");
+		}
 	}
 	return retorno;
-}*/
+}
+
+/**
+ * \brief Verifica si la cadena son numeros, letras con o sin tilde y espacio
+ * \param cadena Cadena de caracteres a ser analizada
+ * \return 1 EXITO / (0) ERROR
+ */
+static int isAlphNum(char cadena[])
+{
+	int retorno = 1;
+	int i;
+
+	for(i=0 ; cadena[i] != '\0'; i++)
+	{
+		if((cadena[i] < 'A' || cadena[i] > 'Z') &&
+			(cadena[i] < 'a' || cadena[i] > 'z') &&
+			(cadena[i] != ' ') &&
+			//(cadena[i] < 'á' || cadena[i] > 'ú') &&
+			//(cadena[i] != 'é') &&
+			(cadena[i] < '0' || cadena[i] > '9'))
+		{
+			retorno = 0;
+			break;
+		}
+	}
+	return retorno;
+}
+
+/*
+* \brief Solicita un char al usuario
+* \param char* pMensaje, Es el mensaje mostrado al usuario
+* \param char* pMensajeError, Es el mensaje de error a ser mostrado al usuario
+* \param char* pResultado, puntero al espacio de memoria donde se dejara el valor obtenido
+* \param int reintentos, cantidad de oportunidades para ingresar el dato
+* \param char minimo, valor minimo admitido
+* \param char maximo, valor maximo admitido
+ * return (-1) ERROR / 0 OK
+ */
+int utn_getChar(char* pMensaje, char* pMensajeError, char* pResultado, int reintentos, int limite)
+{
+	int retorno = -1;
+	char bufferString[LIMITE_BUFFER_STRING];
+
+	if(pMensaje != NULL && pResultado != NULL && pMensajeError != NULL && reintentos >= 0 && limite > 0 )
+	{
+		do
+		{
+			printf("%s", pMensaje);
+			if(	(myGets(bufferString, LIMITE_BUFFER_STRING)== 0) &&
+				(strnlen(bufferString, sizeof(bufferString)-1) <= limite))
+			{
+				strncpy(pResultado, bufferString, limite);
+				retorno = 0;
+				break;
+			}
+			else
+			{
+				printf("%s", pMensajeError);
+				reintentos--;
+			}
+		}while(reintentos >= 0);
+		if(reintentos < 0)
+		{
+			printf("Se quedo sin intentos");
+		}
+	}
+	return retorno;
+}

@@ -20,9 +20,9 @@ int informes(Cliente *arrayClientes, Publicacion *arrayPublicaciones, int avisos
 			switch(opcion)
 			{
 				case 1:
-					auxiliarId = getIdClienteConMasAvisos(arrayPublicaciones, ELEMENTOS_ARRAY);
+					auxiliarId = getIdClienteConMasAvisos(arrayPublicaciones, LEN_PUBLICACIONES);
 					printf("El cliente con más publicaciones es: \n");
-					printCliente(arrayClientes, ELEMENTOS_ARRAY, auxiliarId);
+					printCliente(arrayClientes, LEN_CLIENTES, auxiliarId);
 					break;
 				case 2:
 					printf("La cantidad de avisos pausados es %d\n", avisosPausados);

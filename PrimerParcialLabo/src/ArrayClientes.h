@@ -11,8 +11,11 @@
 #define TRUE 1
 #define FALSE 0
 #define LONG_NOMBRE 50
-#define LONG_CUIT 12
-#define ELEMENTOS_ARRAY 10
+#define LONG_CUIT 11
+#define LEN_CLIENTES 100
+#define LONG_NOMBRE 50
+#define SECTORES 10
+#define MAX_ID 1500
 
 struct
 {
@@ -35,5 +38,6 @@ int BorrarCliente(Cliente* list, int len);
 int CargarCliente(Cliente* list, int len);
 int ModificarCliente(Cliente* list, int len);
 int altaForzadaClientes(Cliente* list, int len);
+int primerCliente(Cliente* list, int len);
 
 #endif /* SRC_ARRAYCLIENTES_H_ */
