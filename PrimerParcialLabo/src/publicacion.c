@@ -26,6 +26,7 @@ int initPublicaciones(Publicacion* list, int len)
 		{
 			list[i].isEmpty = TRUE;
 			list[i].estado = ACTIVA;
+			//list[i].idPublicacion = -1;
 		}
 		retorno = 0;
 	}
@@ -57,6 +58,7 @@ int publicacion_alta(Cliente *pCliente, int limiteCliente, Publicacion *pPublica
 			{
 				bufferPublicacion.idPublicacion = generarIdNuevo();
 				bufferPublicacion.isEmpty = FALSE;
+				bufferPublicacion.estado = ACTIVA;
 				pPublicacion[i]= bufferPublicacion;
 				break;
 			}
@@ -110,16 +112,25 @@ static int generarIdNuevo(void)
 	return id;
 }
 
-int publicacion_pausar(Publicacion *array, int limite, int id)
+/** \brief Sets a publicacion.estado to PAUSADA
+* \param list Publicacion* Pointer to array of publicaciones
+* \param limite int Array length
+* \param id int
+* \param avisosPausados int* pointer to a counter
+* \return int Return (-1) if Error [Invalid length or NULL pointer or ID < 1] - (0) if Ok
+*/
+
+int publicacion_pausar(Publicacion *array, int limite, int id, int *avisosPausados)
 {
 	int retorno = -1;
 	int idPausa;
-	if(array !=NULL && limite>0)
+	if(array !=NULL && limite>0 && id > 0)
 	{
 		idPausa = publicacion_buscarId(array, limite, id);
 		if(idPausa != -1)
 		{
 			array[idPausa].estado = PAUSADA;
+			*avisosPausados += 1;
 		}
 		else
 		{
@@ -130,7 +141,15 @@ int publicacion_pausar(Publicacion *array, int limite, int id)
 	return retorno;
 }
 
-int publicacion_reanudar(Publicacion *array, int limite, int id)
+/** \brief Sets a publicacion.estado to ACTIVA
+* \param list Publicacion* Pointer to array of publicaciones
+* \param limite int Array length
+* \param id int
+* \param avisosPausados int* pointer to a counter
+* \return int Return (-1) if Error [Invalid length or NULL pointer or ID < 1] - (0) if Ok
+*/
+
+int publicacion_reanudar(Publicacion *array, int limite, int id, int *avisosPausados)
 {
 	int retorno = -1;
 	int idPausa;
@@ -140,6 +159,7 @@ int publicacion_reanudar(Publicacion *array, int limite, int id)
 		if(idPausa != -1)
 		{
 			array[idPausa].estado = ACTIVA;
+			*avisosPausados -= 1;
 		}
 		else
 		{
@@ -201,21 +221,28 @@ int contratacion_modificarArray(Cliente *array,int limite)
 	return retorno;
 }*/
 
-
-int publicacion_borrar(Publicacion *array, int limite, int id)
+/** \brief Delete all publicaciones related to a cliente
+* this function put the flag (isEmpty) in TRUE in all
+* position of the array
+* \param list Publicacion* Pointer to array of publicaciones
+* \param limite int Array length
+* \param idCliente int
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*
+*/
+int publicacion_borrar(Publicacion *array, int limite, int idCliente)
 {
 	int retorno = -1;
-	int auxiliarId;
-	int indice;
-	if(getInt("indique id de cliente a eliminar", "id invalido", &auxiliarId, 2, 0,limite)==0)
+	if(array !=NULL && limite>0 && idCliente >0)
 	{
-		//contratacion_imprimirArray(array, CANTIDAD_CONTRATACIONES);
-		//indice = contratacion_buscarId(array, CANTIDAD_CONTRATACIONES, auxiliarId);
-		if(array !=NULL && limite>0 && indice >= 0 && array[indice].isEmpty==0)
+		for(int i;i<limite;i++)
 		{
-				array[indice].isEmpty= 1;
-				retorno=0;
+			if(array[i].idCliente == idCliente)
+			{
+				array[i].isEmpty = TRUE;
+			}
 		}
+		retorno=0;
 	}
 	return retorno;
 }
@@ -231,11 +258,41 @@ int publicacion_buscarId(Publicacion *array, int limite,int valorBuscado)
 		retorno=0;
 		for(i=0;i<limite;i++)
 		{
-			if(array[i].idCliente== valorBuscado)
+			if(array[i].idPublicacion == valorBuscado)
 			{
 				retorno = i;
 				break;
 			}
+		}
+	}
+	return retorno;
+}
+
+int borrarPublicacionesYCliente(Publicacion *arrayPublicaciones, int limitePublicaciones, Cliente *arrayClientes,
+		int limiteClientes)
+{
+	int retorno = -1;
+	int auxiliarId;
+	int respuesta;
+	// Dar de baja primero las publicaciones y luego el cliente
+	if(getInt("indique id de cliente a eliminar", "id invalido", &auxiliarId, 2, MAX_ID, 0)==0)
+	{
+		if(findClienteById(arrayClientes, ELEMENTOS_ARRAY, auxiliarId) != -1)
+		{
+			publicacion_imprimirPorCliente(arrayPublicaciones, ELEMENTOS_ARRAY, auxiliarId);
+			if(getInt("¿Está seguro que desea eliminar este cliente junto con sus publicaciones?\n1 - Si\n2 - No\n",
+					 "Opción inválida", &respuesta, 3, 2, 1)==0)
+			{
+				if(respuesta == 1)
+				{
+					BorrarCliente(arrayClientes, limiteClientes);
+					publicacion_borrar(arrayPublicaciones, limitePublicaciones, auxiliarId);
+				}
+			}
+		}
+		else
+		{
+			printf("No se encontró un cliente con el id solicitado\n");
 		}
 	}
 	return retorno;
@@ -261,3 +318,89 @@ int contratacion_getNextEmptyIndex(Cliente *array, int limite)
 	}
 	return retorno;
 }*/
+
+int publicacionesPorCliente(Publicacion *array, int limite,int idCliente)
+{
+	int retorno=-1;
+
+	if(array != NULL && limite >0 && idCliente > 0)
+	{
+		retorno=0;
+		for(int i=0;i<limite;i++)
+		{
+			if(array[i].idCliente == idCliente)
+			{
+				retorno += 1;
+			}
+		}
+	}
+	return retorno;
+}
+
+int getIdClienteConMasAvisos(Publicacion* list, int len)
+{
+	int retorno = -1;
+	int maximo;
+	int auxiliar;
+	int primerCliente = TRUE;
+	if(list != NULL && len > 0)
+	{
+		for(int i=0; i < len; i++)
+		{
+			if(list[i].isEmpty == FALSE)
+			{
+				if(primerCliente == TRUE)
+				{
+					maximo = publicacionesPorCliente(list, len, list[i].idCliente);
+					primerCliente = FALSE;
+					retorno = list[i].idCliente;
+				}
+				else
+				{
+					auxiliar = publicacionesPorCliente(list, len, list[i].idCliente);
+					if(auxiliar > maximo)
+					{
+						maximo = auxiliar;
+						retorno = list[i].idCliente;
+					}
+
+				}
+			}
+		}
+	}
+	return retorno;
+}
+
+int getRubroConMasAvisos(Publicacion* list, int len)
+{
+	int retorno = -1;
+	int maximo;
+	int auxiliar;
+	int primerCliente = TRUE;
+	if(list != NULL && len > 0)
+	{
+		for(int i=0; i < len; i++)
+		{
+			if(list[i].isEmpty == FALSE)
+			{
+				if(primerCliente == TRUE)
+				{
+					maximo = publicacionesPorCliente(list, len, list[i].idCliente);
+					primerCliente = FALSE;
+					retorno = list[i].idCliente;
+				}
+				else
+				{
+					auxiliar = publicacionesPorCliente(list, len, list[i].idCliente);
+					if(auxiliar > maximo)
+					{
+						maximo = auxiliar;
+						retorno = list[i].idCliente;
+					}
+
+				}
+			}
+		}
+	}
+	return retorno;
+}

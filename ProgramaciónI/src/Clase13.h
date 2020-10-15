@@ -9,7 +9,7 @@
 #define SRC_CLASE13_H_
 
 
-
+int clase13(void);
 
 
 #endif /* SRC_CLASE13_H_ */

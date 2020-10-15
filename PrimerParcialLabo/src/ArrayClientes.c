@@ -58,9 +58,9 @@ int addCliente(Cliente* list, int len, int id, char name[],char lastName[],char 
 			if(list[i].isEmpty == TRUE)
 			{
 				list[i].id = id;
-				strncpy(list[i].name,name,sizeof(LONG_NOMBRE));
-				strncpy(list[i].lastName,lastName,sizeof(LONG_NOMBRE));
-				strncpy(list[i].cuit,cuit,sizeof(LONG_CUIT));
+				strncpy(list[i].name,name,LONG_NOMBRE);
+				strncpy(list[i].lastName,lastName,LONG_NOMBRE);
+				strncpy(list[i].cuit,cuit,LONG_CUIT);
 				list[i].isEmpty = FALSE;
 				return 0;
 			}
@@ -167,7 +167,7 @@ indicate UP or DOWN order
 *
 * \param list Cliente*
 * \param length int
-* \return int
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
 *
 */
 int printClientes(Cliente* list, int len)
@@ -192,25 +192,29 @@ int printClientes(Cliente* list, int len)
 * \param list Cliente*
 * \param len int
 * \oara id int
-* \return int
+* \return int Return (-1) if Error [Invalid length or NULL pointer or id < 1] - (0) if Ok
 *
 */
 
-/*
 int printCliente(Cliente* list, int len, int id)
 {
 	int retorno = -1;
+	int i;
 	if(list != NULL && len > 0 && id > 0)
 	{
-		if(list[i].isEmpty == FALSE)
+		i = findClienteById(list, len, id);
+		if(findClienteById(list, len, id) != -1)
 		{
 			printf("Id: %d - Nombre: %s - Apellido: %s - Cuit: %s\n",list[i].id,list[i].name, list[i].lastName,list[i].cuit);
 		}
+		else
+		{
+			printf("No se encontró el cliente con el Id solicitado\n");
 		}
 		retorno = 0;
 	}
 	return retorno;
-}*/
+}
 
 int CargarCliente(Cliente* list, int len)
 {
@@ -274,21 +278,21 @@ int ModificarCliente(Cliente* list, int len)
 								3, LONG_NOMBRE);
 						if(resultado == -1)
 							return 1;
-						strncpy(list[posicion].name,bufferCliente.name,sizeof(LONG_NOMBRE));
+						strncpy(list[posicion].name,bufferCliente.name,LONG_NOMBRE);
 						break;
 					case 2:
 						resultado =  getNombre("Ingrese el apellido del cliente\n", "Debe ingresar un apellido válido\n", bufferCliente.lastName,
 								3, LONG_NOMBRE);
 						if(resultado == -1)
 							return 1;
-						strncpy(list[posicion].lastName,bufferCliente.lastName,sizeof(LONG_NOMBRE));
+						strncpy(list[posicion].lastName,bufferCliente.lastName,LONG_NOMBRE);
 						break;
 					case 3:
 						resultado = getCuit("Ingrese el cuit del cliente, sin puntos ni guiones\n", "Debe ingresar un cuit válido\n",
 								bufferCliente.cuit, 3, LONG_CUIT);
 						if(resultado == -1)
 							return 1;
-						strncpy(list[posicion].cuit,bufferCliente.cuit,sizeof(LONG_CUIT));
+						strncpy(list[posicion].cuit,bufferCliente.cuit,LONG_CUIT);
 						break;
 				}
 				retorno = 0;
@@ -344,6 +348,28 @@ static int generarIdNuevo(void)
     //para devolver 1+
 	id++;
 	return id;
+}
+
+
+int altaForzadaClientes(Cliente* list, int len)
+{
+	int retorno = -1;
+	if(	list != NULL && len > 0)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(list[i].isEmpty == TRUE)
+			{
+				list[i].id = generarIdNuevo();
+				strncpy(list[i].name,"Federico",LONG_NOMBRE);
+				strncpy(list[i].lastName,"Re",LONG_NOMBRE);
+				strncpy(list[i].cuit,"20362214166",LONG_CUIT);
+				list[i].isEmpty = FALSE;
+				return 0;
+			}
+		}
+	}
+	return retorno;
 }
 
 

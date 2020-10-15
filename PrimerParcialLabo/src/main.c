@@ -1,12 +1,9 @@
 
 #include <stdio.h>
-
 #include "ArrayClientes.h"
 #include "publicacion.h"
+#include "informes.h"
 #include "utn.h"
-#define ELEMENTOS_ARRAY 10
-#define MAX_ID 1000
-
 
 int main(void)
 {
@@ -14,6 +11,7 @@ int main(void)
 	int respuesta;
 	int primeraCarga = 1;
 	int auxiliarId;
+	int avisosPausados = 0;
 	Cliente arrayClientes[ELEMENTOS_ARRAY];
 	initClientes(arrayClientes, ELEMENTOS_ARRAY);
 	Publicacion arrayPublicaciones[ELEMENTOS_ARRAY];
@@ -22,14 +20,15 @@ int main(void)
 	do
 	{
 		respuesta = getInt("Seleccione una opción\n\n1-Dar de alta un cliente\n2-Modificar datos de un cliente\n3-Dar de baja un cliente\n"
-				"4-Publicar un aviso\n5-Pausar publicación\n6-Reanudar publicación\n7-Imprimir clientes\n8-Informar\n9-Salir\n",
+				"4-Publicar un aviso\n5-Pausar publicación\n6-Reanudar publicación\n7-Imprimir publicaciones\n8-Informar\n9-Salir\n",
 				"No es una opción válida\n",&opcion,3,9,1);
 		if(!respuesta)
 		{
 			switch(opcion)
 			{
 				case 1:
-					if(CargarCliente(arrayClientes, ELEMENTOS_ARRAY) != 0)
+					if(altaForzadaClientes(arrayClientes, ELEMENTOS_ARRAY) != 0)
+					//if(CargarCliente(arrayClientes, ELEMENTOS_ARRAY) != 0)
 					{
 						printf("El cliente no fue cargado ya que no se ingresaron valores válidos\n");
 					}
@@ -55,23 +54,9 @@ int main(void)
 					}
 					else
 					{
-						// Dar de baja primero las publicaciones y luego el cliente
-						if(getInt("indique id de cliente a eliminar", "id invalido", &auxiliarId, 2, MAX_ID, 0)==0)
-						{
-							if(findClienteById(arrayClientes, ELEMENTOS_ARRAY, auxiliarId) != -1)
-							{
-								publicacion_imprimirPorCliente(arrayPublicaciones, ELEMENTOS_ARRAY, auxiliarId);
-							}
-							else
-							{
-								printf("No se encontró un cliente con el id solicitado\n");
-							}
-						}
-
-						if(BorrarCliente(arrayClientes, ELEMENTOS_ARRAY) == 0)
-						{
-							primeraCarga = 1;
-						}
+						//Borra pero si se recrea el cliente se habilitan las publicaciones
+						borrarPublicacionesYCliente(arrayPublicaciones,ELEMENTOS_ARRAY, arrayClientes, ELEMENTOS_ARRAY);
+						primeraCarga = 1;
 					}
 					break;
 				case 4:
@@ -93,13 +78,12 @@ int main(void)
 					{
 						if(getInt("Indique id de la publicación a pausar", "id invalido", &auxiliarId, 2, MAX_ID, 0)==0)
 						{
-							publicacion_pausar(arrayPublicaciones, ELEMENTOS_ARRAY, auxiliarId);
+							publicacion_pausar(arrayPublicaciones, ELEMENTOS_ARRAY, auxiliarId, &avisosPausados);
 						}
 						else
 						{
 							printf("No se ingresó un id válido\n");
 						}
-
 					}
 					break;
 				case 6:
@@ -111,7 +95,7 @@ int main(void)
 					{
 						if(getInt("Indique id de la publicación a reanudar", "id invalido", &auxiliarId, 2, MAX_ID, 0)==0)
 						{
-							publicacion_reanudar(arrayPublicaciones, ELEMENTOS_ARRAY, auxiliarId);
+							publicacion_reanudar(arrayPublicaciones, ELEMENTOS_ARRAY, auxiliarId, &avisosPausados);
 						}
 						else
 						{
@@ -130,7 +114,14 @@ int main(void)
 					}
 					break;
 				case 8:
-					break;
+					if(primeraCarga != 0)
+					{
+						printf("Debe cargar al menos un cliente antes de poder acceder a esta opción\n");
+					}
+					else
+					{
+						informes(arrayClientes, arrayPublicaciones, avisosPausados);
+					}
 			}
 		}
 	}while(opcion!=9);
