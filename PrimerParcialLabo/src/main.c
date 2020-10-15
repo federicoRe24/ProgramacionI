@@ -49,7 +49,6 @@ int main(void)
 					}
 					else
 					{
-						//Borra pero si se recrea el cliente se habilitan las publicaciones
 						borrarPublicacionesYCliente(arrayPublicaciones,LEN_PUBLICACIONES, arrayClientes, LEN_CLIENTES);
 					}
 					break;
@@ -60,6 +59,7 @@ int main(void)
 					}
 					else
 					{
+						printClientes(arrayClientes, LEN_CLIENTES);
 						publicacion_alta(arrayClientes, LEN_CLIENTES, arrayPublicaciones, LEN_PUBLICACIONES);
 					}
 					break;
@@ -70,7 +70,7 @@ int main(void)
 					}
 					else
 					{
-						if(getInt("Indique id de la publicación a pausar", "id invalido", &auxiliarId, 2, MAX_ID, 0)==0)
+						if(getInt("Indique id de la publicación a pausar", "id invalido", &auxiliarId, 3, MAX_ID, 1)==0)
 						{
 							publicacion_pausar(arrayPublicaciones, LEN_PUBLICACIONES, auxiliarId, &avisosPausados);
 						}

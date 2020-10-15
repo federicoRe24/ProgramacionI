@@ -31,5 +31,9 @@ int borrarPublicacionesYCliente(Publicacion *arrayPublicaciones, int limitePubli
 		int limiteClientes);
 int publicacionesPorCliente(Publicacion *array, int limite,int idCliente);
 int getIdClienteConMasAvisos(Publicacion* list, int len);
+int publicacionesActivasPorCliente(Publicacion *array, int limite,int idCliente);
+int getIdClienteConMasAvisosActivos(Publicacion* list, int len);
+int publicacionesPausadasPorCliente(Publicacion *array, int limite,int idCliente);
+int getIdClienteConMasAvisosPausados(Publicacion* list, int len);
 
 #endif /* SRC_PUBLICACION_H_ */

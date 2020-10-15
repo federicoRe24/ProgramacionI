@@ -43,27 +43,31 @@ int publicacion_alta(Cliente *pCliente, int limiteCliente, Publicacion *pPublica
 	int opcion;
 	Publicacion bufferPublicacion;
 
-	if(printClientes(pCliente, limiteCliente) == 0) // imprimir en main para no mezclar los 2
+	if(getInt("Ingrese el id del cliente para crear un nuevo aviso: ", "Debe ingresar un id válido\n", &opcion, 3, 4, 1) == 0)
 	{
-		if(getInt("Ingrese el id del cliente para crear un nuevo aviso", "Debe ingresar un id válido", &opcion, 3, 4, 1) == 0)
+		if(findClienteById(pCliente, limiteCliente, opcion) != -1)
 		{
 			bufferPublicacion.idCliente = opcion;
 			getInt("Ingrese el número de rubro: ", "Error\n", &bufferPublicacion.numeroRubro,3,10,1);
 			utn_getChar("Ingrese el texto del aviso (hasta 64 caracteres): ", "\nError",bufferPublicacion.textoAviso, 3,AVISO_LEN);
-			//utn_getString("Ingrese el nombre del video", "Error\n", bufferPublicacion.nombreVideo, 2,NOMBRE_LEN);
-		}
-		for(int i=0;i<limitePublicacion;i++)
-		{
-			if(pPublicacion[i].isEmpty == TRUE)
+
+			for(int i=0;i<limitePublicacion;i++)
 			{
-				bufferPublicacion.idPublicacion = generarIdNuevo();
-				bufferPublicacion.isEmpty = FALSE;
-				bufferPublicacion.estado = ACTIVA;
-				pPublicacion[i]= bufferPublicacion;
-				break;
+				if(pPublicacion[i].isEmpty == TRUE)
+				{
+					bufferPublicacion.idPublicacion = generarIdNuevo();
+					bufferPublicacion.isEmpty = FALSE;
+					bufferPublicacion.estado = ACTIVA;
+					pPublicacion[i]= bufferPublicacion;
+					break;
+				}
 			}
+			publicacion_imprimirArray(pPublicacion, limitePublicacion);
 		}
-		publicacion_imprimirArray(pPublicacion, limitePublicacion);
+		else
+		{
+			printf("No se encontró ningún cliente con el id solicitado\n");
+		}
 	}
 	return 0;
 }
@@ -255,7 +259,6 @@ int publicacion_buscarId(Publicacion *array, int limite,int valorBuscado)
 
 	if(array != NULL && limite >0 && valorBuscado > 0)
 	{
-		retorno=0;
 		for(i=0;i<limite;i++)
 		{
 			if(array[i].idPublicacion == valorBuscado)
@@ -371,6 +374,111 @@ int getIdClienteConMasAvisos(Publicacion* list, int len)
 	return retorno;
 }
 
+int publicacionesActivasPorCliente(Publicacion *array, int limite,int idCliente)
+{
+	int retorno=-1;
+
+	if(array != NULL && limite >0 && idCliente > 0)
+	{
+		retorno=0;
+		for(int i=0;i<limite;i++)
+		{
+			if(array[i].idCliente == idCliente && array[i].estado == ACTIVA)
+			{
+				retorno += 1;
+			}
+		}
+	}
+	return retorno;
+}
+
+int getIdClienteConMasAvisosActivos(Publicacion* list, int len)
+{
+	int retorno = -1;
+	int maximo;
+	int auxiliar;
+	int primerCliente = TRUE;
+	if(list != NULL && len > 0)
+	{
+		for(int i=0; i < len; i++)
+		{
+			if(list[i].isEmpty == FALSE && list[i].estado == ACTIVA)
+			{
+				if(primerCliente == TRUE)
+				{
+					maximo = publicacionesActivasPorCliente(list, len, list[i].idCliente);
+					primerCliente = FALSE;
+					retorno = list[i].idCliente;
+				}
+				else
+				{
+					auxiliar = publicacionesActivasPorCliente(list, len, list[i].idCliente);
+					if(auxiliar > maximo)
+					{
+						maximo = auxiliar;
+						retorno = list[i].idCliente;
+					}
+
+				}
+			}
+		}
+	}
+	return retorno;
+}
+
+int publicacionesPausadasPorCliente(Publicacion *array, int limite,int idCliente)
+{
+	int retorno=-1;
+
+	if(array != NULL && limite >0 && idCliente > 0)
+	{
+		retorno=0;
+		for(int i=0;i<limite;i++)
+		{
+			if(array[i].idCliente == idCliente && array[i].estado == PAUSADA)
+			{
+				retorno += 1;
+			}
+		}
+	}
+	return retorno;
+}
+
+int getIdClienteConMasAvisosPausados(Publicacion* list, int len)
+{
+	int retorno = -1;
+	int maximo;
+	int auxiliar;
+	int primerCliente = TRUE;
+	if(list != NULL && len > 0)
+	{
+		for(int i=0; i < len; i++)
+		{
+			if(list[i].isEmpty == FALSE && list[i].estado == PAUSADA)
+			{
+				if(primerCliente == TRUE)
+				{
+					maximo = publicacionesPausadasPorCliente(list, len, list[i].idCliente);
+					primerCliente = FALSE;
+					retorno = list[i].idCliente;
+				}
+				else
+				{
+					auxiliar = publicacionesPausadasPorCliente(list, len, list[i].idCliente);
+					if(auxiliar > maximo)
+					{
+						maximo = auxiliar;
+						retorno = list[i].idCliente;
+					}
+
+				}
+			}
+		}
+	}
+	return retorno;
+}
+
+// Terminar
 int getRubroConMasAvisos(Publicacion* list, int len)
 {
 	int retorno = -1;

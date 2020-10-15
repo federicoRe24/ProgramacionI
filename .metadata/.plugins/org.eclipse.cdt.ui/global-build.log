@@ -1,12 +1,15 @@
-18:11:20 **** Incremental Build of configuration Debug for project PrimerParcialLabo ****
+19:41:04 **** Incremental Build of configuration Debug for project PrimerParcialLabo ****
 make all 
-Building file: ../src/ArrayClientes.c
+Building file: ../src/publicacion.c
 Invoking: GCC C Compiler
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/ArrayClientes.d" -MT"src/ArrayClientes.o" -o "src/ArrayClientes.o" "../src/ArrayClientes.c"
-Finished building: ../src/ArrayClientes.c
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/publicacion.d" -MT"src/publicacion.o" -o "src/publicacion.o" "../src/publicacion.c"
+Finished building: ../src/publicacion.c
  
 Building target: PrimerParcialLabo
 Invoking: GCC C Linker
 gcc  -o "PrimerParcialLabo"  ./src/ArrayClientes.o ./src/informes.o ./src/main.o ./src/publicacion.o ./src/utn.o   
 Finished building target: PrimerParcialLabo
  
+19:41:09 **** Incremental Build of configuration Debug for project PrimerParcialLabo ****
+make all 
+make: Nothing to be done for 'all'.
