@@ -9,5 +9,7 @@ int getNombre(char* mensaje, char* mensajeError, char* pResultado,int reintentos
 int getCuit(char* mensaje, char* mensajeError, char* pResultado,int reintentos, int len);
 int utn_getAlphaNum(char* pMensaje, char* pMensajeError, char* pResultado, int reintentos, int limite);
 int utn_getChar(char* pMensaje, char* pMensajeError, char* pResultado, int reintentos, int limite);
+int utn_sortArrayInt(int pArray[], int limite);
+int GetMayorValorArray(int *array, int len);
 
 #endif /* SRC_UTN_H_ */

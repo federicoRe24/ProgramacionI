@@ -1,4 +1,4 @@
-19:41:04 **** Incremental Build of configuration Debug for project PrimerParcialLabo ****
+22:31:12 **** Incremental Build of configuration Debug for project PrimerParcialLabo ****
 make all 
 Building file: ../src/publicacion.c
 Invoking: GCC C Compiler
@@ -10,6 +10,3 @@ Invoking: GCC C Linker
 gcc  -o "PrimerParcialLabo"  ./src/ArrayClientes.o ./src/informes.o ./src/main.o ./src/publicacion.o ./src/utn.o   
 Finished building target: PrimerParcialLabo
  
-19:41:09 **** Incremental Build of configuration Debug for project PrimerParcialLabo ****
-make all 
-make: Nothing to be done for 'all'.

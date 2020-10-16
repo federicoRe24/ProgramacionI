@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "utn.h"
+#define CANT_RUBROS 10
 
 static int generarIdNuevo(void);
 
@@ -48,7 +49,7 @@ int publicacion_alta(Cliente *pCliente, int limiteCliente, Publicacion *pPublica
 		if(findClienteById(pCliente, limiteCliente, opcion) != -1)
 		{
 			bufferPublicacion.idCliente = opcion;
-			getInt("Ingrese el número de rubro: ", "Error\n", &bufferPublicacion.numeroRubro,3,10,1);
+			getInt("Ingrese el número de rubro: ", "Error\n", &bufferPublicacion.numeroRubro,3,CANT_RUBROS,1);
 			utn_getChar("Ingrese el texto del aviso (hasta 64 caracteres): ", "\nError",bufferPublicacion.textoAviso, 3,AVISO_LEN);
 
 			for(int i=0;i<limitePublicacion;i++)
@@ -135,6 +136,7 @@ int publicacion_pausar(Publicacion *array, int limite, int id, int *avisosPausad
 		{
 			array[idPausa].estado = PAUSADA;
 			*avisosPausados += 1;
+			printf("La publicación fue pausada\n");
 		}
 		else
 		{
@@ -164,6 +166,7 @@ int publicacion_reanudar(Publicacion *array, int limite, int id, int *avisosPaus
 		{
 			array[idPausa].estado = ACTIVA;
 			*avisosPausados -= 1;
+			printf("Se reanudó la publicación\n");
 		}
 		else
 		{
@@ -173,57 +176,6 @@ int publicacion_reanudar(Publicacion *array, int limite, int id, int *avisosPaus
 	}
 	return retorno;
 }
-
-
-/*
-int contratacion_altaArray(Cliente *array,int limite) // NO anidar mas de 3 ifs, concatenar en todo caso
-{
-	int retorno = -1;
-	Cliente bufferCliente;
-	int index;
-	index= contratacion_getNextEmptyIndex(array, CANTIDAD_CONTRATACIONES);
-	if(array !=NULL && limite>0 && index >= 0  && array[index].isEmpty==1)
-	{
-		if( utn_getNombre("nombre?", "\nError",bufferCliente.nombre, 2,NOMBRE_LEN)==0 &&
-		    utn_getString("direccion?", "\nError", bufferCliente.direccion, 2,NOMBRE_LEN)==0 &&
-		    utn_getFloat("precio?", "\nError", &bufferCliente.precioDia, 2, 0, 99999)==0 &&
-			utn_getNumero("tipo contratacion 1 led 2 lcd", "\nError", &bufferCliente.tipoCliente, 2, 1, 2)==0)
-		{
-			bufferCliente.idCliente =generarIdNuevo();
-			bufferCliente.isEmpty =0;
-			array[index]= bufferCliente;
-			retorno=0;
-		}
-	}
-	return retorno;
-}
-int contratacion_modificarArray(Cliente *array,int limite)
-{
-	int retorno = -1;
-	Cliente bufferCliente;
-	int auxiliarId;
-	int indice;
-	contratacion_imprimirArray(array, CANTIDAD_CONTRATACIONES);
-	if(utn_getNumero("indique id de contratacionente a modificar", "id invalido", &auxiliarId, 2, 0, CANTIDAD_CONTRATACIONES)==0)
-	{
-		indice = contratacion_buscarId(array, CANTIDAD_CONTRATACIONES, auxiliarId);
-		if(array !=NULL && limite>0 && indice >= 0 && array[indice].isEmpty==0)
-		{
-			if(utn_getNombre("nombre?", "\nError",bufferCliente.nombre, 2,NOMBRE_LEN)==0 &&
-				    utn_getString("direccion?", "\nError", bufferCliente.direccion, 2,NOMBRE_LEN)==0 &&
-				    utn_getFloat("precio?", "\nError", &bufferCliente.precioDia, 2, 0, 99999)==0 &&
-					utn_getNumero("tipo contratacion 1 led 2 lcd", "\nError", &bufferCliente.tipoCliente, 2, 1, 2)==0)
-			{
-				bufferCliente.idCliente=auxiliarId;
-				bufferCliente.isEmpty =0;
-				array[indice]= bufferCliente;
-				retorno=0;
-
-			}
-		}
-	}
-	return retorno;
-}*/
 
 /** \brief Delete all publicaciones related to a cliente
 * this function put the flag (isEmpty) in TRUE in all
@@ -261,7 +213,7 @@ int publicacion_buscarId(Publicacion *array, int limite,int valorBuscado)
 	{
 		for(i=0;i<limite;i++)
 		{
-			if(array[i].idPublicacion == valorBuscado)
+			if(array[i].isEmpty == FALSE && array[i].idPublicacion == valorBuscado )
 			{
 				retorno = i;
 				break;
@@ -301,27 +253,14 @@ int borrarPublicacionesYCliente(Publicacion *arrayPublicaciones, int limitePubli
 	return retorno;
 }
 
-/*
-int contratacion_getNextEmptyIndex(Cliente *array, int limite)
-{
-	int retorno=-1;
-	int i;
+/** \brief Get the number of publicaciones by cliente
+* \param list Publicacion* Pointer to array of publicaciones
+* \param limite int Array length
+* \param idCliente int
+* \return int Return (-1) if Error [Invalid length or NULL pointer or idCliente < 1] or the number of publicaciones
+*/
 
-	if(array != NULL && limite >0)
-	{
-		retorno=0;
-		for(i=0;i<limite;i++)
-		{
-			if(array[i].isEmpty==1)
-			{
-				retorno= i;
-				break;
-			}
-		}
-	}
-	return retorno;
-}*/
-
+//Control + click sobre la funcion para ir a la definición
 int publicacionesPorCliente(Publicacion *array, int limite,int idCliente)
 {
 	int retorno=-1;
@@ -331,7 +270,7 @@ int publicacionesPorCliente(Publicacion *array, int limite,int idCliente)
 		retorno=0;
 		for(int i=0;i<limite;i++)
 		{
-			if(array[i].idCliente == idCliente)
+			if(array[i].idCliente == idCliente && array[i].isEmpty == FALSE)
 			{
 				retorno += 1;
 			}
@@ -340,6 +279,11 @@ int publicacionesPorCliente(Publicacion *array, int limite,int idCliente)
 	return retorno;
 }
 
+/** \brief Get the id of cliente with more publicaciones
+* \param list Publicacion* Pointer to array of publicaciones
+* \param limite int Array length
+* \return int Return (-1) if Error [Invalid length or NULL pointer] or the id of cliente
+*/
 int getIdClienteConMasAvisos(Publicacion* list, int len)
 {
 	int retorno = -1;
@@ -366,7 +310,6 @@ int getIdClienteConMasAvisos(Publicacion* list, int len)
 						maximo = auxiliar;
 						retorno = list[i].idCliente;
 					}
-
 				}
 			}
 		}
@@ -374,6 +317,12 @@ int getIdClienteConMasAvisos(Publicacion* list, int len)
 	return retorno;
 }
 
+/** \brief Get the number of publicaciones ACTIVAS by cliente
+* \param list Publicacion* Pointer to array of publicaciones
+* \param limite int Array length
+* \param idCliente int
+* \return int Return (-1) if Error [Invalid length or NULL pointer or idCliente < 1] or the number of publicaciones
+*/
 int publicacionesActivasPorCliente(Publicacion *array, int limite,int idCliente)
 {
 	int retorno=-1;
@@ -383,7 +332,7 @@ int publicacionesActivasPorCliente(Publicacion *array, int limite,int idCliente)
 		retorno=0;
 		for(int i=0;i<limite;i++)
 		{
-			if(array[i].idCliente == idCliente && array[i].estado == ACTIVA)
+			if(array[i].idCliente == idCliente && array[i].estado == ACTIVA && array[i].isEmpty == FALSE)
 			{
 				retorno += 1;
 			}
@@ -392,6 +341,11 @@ int publicacionesActivasPorCliente(Publicacion *array, int limite,int idCliente)
 	return retorno;
 }
 
+/** \brief Get the id of cliente with more publicaciones ACTIVAS
+* \param list Publicacion* Pointer to array of publicaciones
+* \param limite int Array length
+* \return int Return (-1) if Error [Invalid length or NULL pointer] or the id of cliente
+*/
 int getIdClienteConMasAvisosActivos(Publicacion* list, int len)
 {
 	int retorno = -1;
@@ -426,6 +380,13 @@ int getIdClienteConMasAvisosActivos(Publicacion* list, int len)
 	return retorno;
 }
 
+/** \brief Get the number of publicaciones Pausadas by cliente
+* \param list Publicacion* Pointer to array of publicaciones
+* \param limite int Array length
+* \param idCliente int
+* \return int Return (-1) if Error [Invalid length or NULL pointer or idCliente < 1] or the number of publicaciones
+*
+*/
 int publicacionesPausadasPorCliente(Publicacion *array, int limite,int idCliente)
 {
 	int retorno=-1;
@@ -435,7 +396,7 @@ int publicacionesPausadasPorCliente(Publicacion *array, int limite,int idCliente
 		retorno=0;
 		for(int i=0;i<limite;i++)
 		{
-			if(array[i].idCliente == idCliente && array[i].estado == PAUSADA)
+			if(array[i].idCliente == idCliente && array[i].estado == PAUSADA && array[i].isEmpty == FALSE)
 			{
 				retorno += 1;
 			}
@@ -444,6 +405,11 @@ int publicacionesPausadasPorCliente(Publicacion *array, int limite,int idCliente
 	return retorno;
 }
 
+/** \brief Get the id of cliente with more publicaciones PAUSADAS
+* \param list Publicacion* Pointer to array of publicaciones
+* \param limite int Array length
+* \return int Return (-1) if Error [Invalid length or NULL pointer] or the id of cliente
+*/
 int getIdClienteConMasAvisosPausados(Publicacion* list, int len)
 {
 	int retorno = -1;
@@ -478,37 +444,22 @@ int getIdClienteConMasAvisosPausados(Publicacion* list, int len)
 	return retorno;
 }
 
-// Terminar
 int getRubroConMasAvisos(Publicacion* list, int len)
 {
 	int retorno = -1;
-	int maximo;
-	int auxiliar;
-	int primerCliente = TRUE;
+	int rubros[CANT_RUBROS] = {0};
+	int auxiliarRubro;
 	if(list != NULL && len > 0)
 	{
 		for(int i=0; i < len; i++)
 		{
 			if(list[i].isEmpty == FALSE)
 			{
-				if(primerCliente == TRUE)
-				{
-					maximo = publicacionesPorCliente(list, len, list[i].idCliente);
-					primerCliente = FALSE;
-					retorno = list[i].idCliente;
-				}
-				else
-				{
-					auxiliar = publicacionesPorCliente(list, len, list[i].idCliente);
-					if(auxiliar > maximo)
-					{
-						maximo = auxiliar;
-						retorno = list[i].idCliente;
-					}
-
-				}
+				auxiliarRubro = list[i].numeroRubro - 1;
+				rubros[auxiliarRubro] += 1;
 			}
 		}
+		retorno = GetMayorValorArray(rubros, CANT_RUBROS) + 1;
 	}
 	return retorno;
 }

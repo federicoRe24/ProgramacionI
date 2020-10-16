@@ -316,3 +316,62 @@ int utn_getChar(char* pMensaje, char* pMensajeError, char* pResultado, int reint
 	}
 	return retorno;
 }
+
+/**
+ * \brief Ordena un array de enteros de manera DESCENDENTE
+ * \param int pArray[] es el puntero al array a ser ordenado
+ * \param int limite Es la longitud del array
+ * \return la cantidad de iteraciones si OK o -1 para indicar error
+ */
+int utn_sortArrayInt(int pArray[], int limite)
+{
+	int flagSwap;
+	int i;
+	int contador = 0;
+	int retorno = -1;
+	int buffer;
+	int nuevoLimite;
+
+	if(pArray != NULL && limite >= 0)
+	{
+		do
+		{
+			nuevoLimite = limite -1;
+			flagSwap = 0;
+			for(i = 0; i < nuevoLimite; i++)
+			{
+				contador++;
+				if(pArray[i] < pArray[i+1])
+				{
+					flagSwap = 1;
+					buffer = pArray[i];
+					pArray[i] = pArray[i + 1];
+					pArray[i + 1] = buffer;
+				}
+			}
+			nuevoLimite--;
+			retorno = contador;
+		}while(flagSwap);
+	}
+	return retorno;
+}
+
+int GetMayorValorArray(int *array, int len)
+{
+	int retorno = -1;
+	int max;
+	if(array != NULL && len > 0)
+	{
+		max = array[0];
+		retorno = 0;
+		for(int i=1; i < len; i++)
+		{
+			if(array[i] > max)
+			{
+				max = array[i];
+				retorno = i;
+			}
+		}
+	}
+	return retorno;
+}

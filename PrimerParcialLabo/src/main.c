@@ -70,7 +70,7 @@ int main(void)
 					}
 					else
 					{
-						if(getInt("Indique id de la publicación a pausar", "id invalido", &auxiliarId, 3, MAX_ID, 1)==0)
+						if(getInt("Indique id de la publicación a pausar: ", "id invalido\n", &auxiliarId, 3, MAX_ID, 1)==0)
 						{
 							publicacion_pausar(arrayPublicaciones, LEN_PUBLICACIONES, auxiliarId, &avisosPausados);
 						}
@@ -87,7 +87,7 @@ int main(void)
 					}
 					else
 					{
-						if(getInt("Indique id de la publicación a reanudar", "id invalido", &auxiliarId, 2, MAX_ID, 0)==0)
+						if(getInt("Indique id de la publicación a reanudar: ", "id invalido\n", &auxiliarId, 2, MAX_ID, 0)==0)
 						{
 							publicacion_reanudar(arrayPublicaciones, LEN_PUBLICACIONES, auxiliarId, &avisosPausados);
 						}

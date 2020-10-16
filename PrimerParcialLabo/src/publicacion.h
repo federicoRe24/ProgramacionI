@@ -35,5 +35,6 @@ int publicacionesActivasPorCliente(Publicacion *array, int limite,int idCliente)
 int getIdClienteConMasAvisosActivos(Publicacion* list, int len);
 int publicacionesPausadasPorCliente(Publicacion *array, int limite,int idCliente);
 int getIdClienteConMasAvisosPausados(Publicacion* list, int len);
+int getRubroConMasAvisos(Publicacion* list, int len);
 
 #endif /* SRC_PUBLICACION_H_ */

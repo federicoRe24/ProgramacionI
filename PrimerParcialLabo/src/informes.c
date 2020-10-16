@@ -35,6 +35,7 @@ int informes(Cliente *arrayClientes, Publicacion *arrayPublicaciones, int avisos
 					printf("La cantidad de avisos pausados es %d\n", avisosPausados);
 					break;
 				case 3:
+					printf("El rubro con más avisos es: %d\n", getRubroConMasAvisos(arrayPublicaciones, LEN_PUBLICACIONES));
 					break;
 				case 4:
 					auxiliarId = getIdClienteConMasAvisosActivos(arrayPublicaciones, LEN_PUBLICACIONES);
