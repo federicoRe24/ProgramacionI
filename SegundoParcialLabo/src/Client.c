@@ -6,6 +6,7 @@
 #include "utn.h"
 
 static int generarIdNuevo(LinkedList* pArrayListClient);
+static int IsCuitRepetido(LinkedList* pArrayListClient, char* cuit);
 
 Client* client_new()
 {
@@ -231,6 +232,14 @@ int client_load(int* id,char* nombre,char* apellido, char* cuit, LinkedList* pAr
 	if(resultado == -1)
 		return resultado;
 
+	resultado = IsCuitRepetido(pArrayListClient, cuit);
+
+	if(resultado == -1)
+		{
+			printf("Error, ya existe un empleado con el cuit ingresado\n");
+			return resultado;
+		}
+
 	*id = generarIdNuevo(pArrayListClient);
 	resultado = 0;
 
@@ -264,3 +273,29 @@ static int generarIdNuevo(LinkedList* pArrayListClient)
 	}
 	return retorno;
 }
+
+
+static int IsCuitRepetido(LinkedList* pArrayListClient, char* cuit)
+{
+	int retorno = -1;
+	if(pArrayListClient != NULL && cuit != NULL)
+	{
+		retorno = 0;
+		int len = ll_len(pArrayListClient);
+		Client* pClient;
+		char* cuitActual;
+		for(int i=0; i < len; i++)
+		{
+			pClient = ll_get(pArrayListClient, i);
+			cuitActual = pClient->cuit;
+			if(strncmp(cuitActual,cuit,LONG_CUIT) == 0)
+			{
+				retorno = -1;
+				break;
+			}
+		}
+	}
+	return retorno;
+}
+
+

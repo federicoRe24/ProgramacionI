@@ -496,7 +496,7 @@ int controller_editSale(LinkedList* pArrayListSale)
 							retorno = sale_setNombreImagen(bufferSale, nombreImagen);
 							break;
 						case 3:
-							retorno =  getNombre("Ingrese la nueva zona\n", "Debe ingresar una zona válida\n", zona,
+							retorno =  getZona("Ingrese la nueva zona: CABA, ZONA SUR ó ZONA OESTE\n", "Debe ingresar una zona válida\n", zona,
 									3, LONG_NOMBRE);
 							retorno = sale_setZona(bufferSale, zona);
 							break;

@@ -21,7 +21,7 @@ int main()
     LinkedList* ventasACobrar;
     LinkedList* ventasCobradas;
 
-    // Zona con numeros
+    // validar cuit repetido
 
 	do
 	{
@@ -33,12 +33,10 @@ int main()
 			{
 				case 1:
 					controller_addClient(listaClientes);
-					controller_ListClient(listaClientes);
 	                break;
 				case 2:
 					controller_ListClient(listaClientes);
 					controller_sellPoster(listaClientes, listaVentas);
-					controller_ListSale(listaVentas);
 					break;
 				case 3:
 					ventasACobrar = controller_filterListByEstate(listaVentas, IsVentaCobrada);

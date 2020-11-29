@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdio_ext.h>
 #include <string.h>
+#include <ctype.h>
 #include "utn.h"
 #define LIMITE_BUFFER_STRING 1000
 //#define LONG_CUIT 13
@@ -141,6 +142,29 @@ int esUnCuitValido(char* cadena,int limite)
 	return respuesta;
 }
 
+
+/**
+ * \brief 	Verifica una cadena recibida como parametro para determinir
+ * 			si es una zona valido
+ * \param char* cadena, Cadena a analizar
+ * \param int limite, indica la cantidad de letras maxima de la cadena
+ * \return (0) Indicar que no es un nombre valido / (1) Indica que que es un nombre valido
+ *
+ */
+int esUnaZonaValida(char* cadena,int limite)
+{
+	int respuesta = 1; // TODO OK
+
+	for(int i=0; i<=limite && cadena[i] != '\0';i++)
+	{
+		cadena[i] = toupper(cadena[i]);
+	}
+	if(strcmp(cadena,"CABA") != 0 && strcmp(cadena,"ZONA SUR") != 0 && strcmp(cadena,"ZONA OESTE") != 0)
+		respuesta = 0;
+	//CABA, ZONA SUR o ZONA OESTE)
+	return respuesta;
+}
+
 /**
  * \brief Solicita un nombre al usuario
  * \param char* mensaje, Es el mensaje a ser mostrado al usuario
@@ -168,6 +192,52 @@ int getNombre(char* mensaje, char* mensajeError, char* pResultado,int reintentos
 			if( myGets(bufferString,LIMITE_BUFFER_STRING) == 0 &&
 				strnlen(bufferString,sizeof(bufferString)-1)<= limite &&
 				esUnNombreValido(bufferString,limite) != 0 )
+			{
+				retorno = 0;
+				//NO EXISTE pResultado = bufferString;
+				strncpy(pResultado,bufferString,limite);
+				break;
+			}
+			else
+			{
+				printf("%s",mensajeError);
+				reintentos--;
+			}
+		}while(reintentos >= 0);
+
+	}
+	return retorno;
+
+}
+
+
+/**
+ * \brief Solicita una zona al usuario
+ * \param char* mensaje, Es el mensaje a ser mostrado al usuario
+ * \param char* mensaje, Es el mensaje de error a ser mostrado al usuario
+ * \param int* pResultado, puntero al espacio de memoria donde se dejara el valor obtenido
+ * \param int reintentos, cantidad de oportunidades para ingresar el dato
+ * \param int limite, indica la cantidad de letras maxima de la zona
+ * \return (-1) Error / (0) Ok
+ *
+ */
+int getZona(char* mensaje, char* mensajeError, char* pResultado,int reintentos, int limite)
+{
+	char bufferString[LIMITE_BUFFER_STRING];
+	int retorno = -1;
+
+	if(		mensaje != NULL &&
+			mensajeError != NULL &&
+			pResultado != NULL &&
+			reintentos >= 0 &&
+			limite > 0)
+	{
+		do
+		{
+			printf("%s",mensaje);
+			if( myGets(bufferString,LIMITE_BUFFER_STRING) == 0 &&
+				strnlen(bufferString,sizeof(bufferString)-1)<= limite &&
+				esUnaZonaValida(bufferString,limite) != 0 )
 			{
 				retorno = 0;
 				//NO EXISTE pResultado = bufferString;

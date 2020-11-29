@@ -102,7 +102,7 @@ char* sale_getNombreImagen(Sale* this)
 int sale_setNombreImagen(Sale* this,char* nombreImagen)
 {
 	int retorno = -1;
-	if(this!=NULL) // && isValidName(nombre, LONG_NOMBRE) == 1) validacion nombre imagen
+	if(this!=NULL && nombreImagen != NULL)
 	{
 		strncpy(this->nombreImagen,nombreImagen,sizeof(this->nombreImagen));
 		retorno = 0;
@@ -123,7 +123,7 @@ char* sale_getZona(Sale* this)
 int sale_setZona(Sale* this,char* zona)
 {
 	int retorno = -1;
-	if(this!=NULL) // && isValidName(apellido, LONG_NOMBRE) == 1) validar nombre zona
+	if(this!=NULL && esUnaZonaValida(zona,LONG_NOMBRE))
 	{
 		strncpy(this->zona,zona,sizeof(this->zona));
 		retorno = 0;
@@ -144,7 +144,7 @@ int sale_getEstado(Sale* this)
 int sale_setEstado(Sale* this,int estado)
 {
 	int retorno = -1;
-	if(this!=NULL) // && isValidName(apellido, LONG_NOMBRE) == 1) Hacer valid cuit
+	if(this!=NULL && (estado == 0 || estado == 1))
 	{
 		this->estado = estado;
 		retorno = 0;
@@ -269,7 +269,7 @@ int sale_load(int* id, int* cantidadAfiches, char* nombreImagen, char* zona, int
 	if(resultado == -1)
 		return resultado;
 
-	resultado =  getNombre("Ingrese la zona donde se pegarán los afiches\n", "Debe ingresar una zona válida\n", zona,
+	resultado =  getZona("Ingrese la zona donde se pegarán los afiches: CABA, ZONA SUR ó ZONA OESTE\n", "Debe ingresar una zona válida\n", zona,
 			3, LONG_NOMBRE);
 
 	if(resultado == -1)
