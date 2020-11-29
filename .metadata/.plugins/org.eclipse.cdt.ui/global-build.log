@@ -1,12 +1,71 @@
-22:31:12 **** Incremental Build of configuration Debug for project PrimerParcialLabo ****
+17:02:57 **** Incremental Build of configuration Debug for project SegundoParcialLabo ****
 make all 
-Building file: ../src/publicacion.c
+Building file: ../src/utn.c
 Invoking: GCC C Compiler
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/publicacion.d" -MT"src/publicacion.o" -o "src/publicacion.o" "../src/publicacion.c"
-Finished building: ../src/publicacion.c
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/utn.d" -MT"src/utn.o" -o "src/utn.o" "../src/utn.c"
+Finished building: ../src/utn.c
  
-Building target: PrimerParcialLabo
+Building target: SegundoParcialLabo
 Invoking: GCC C Linker
-gcc  -o "PrimerParcialLabo"  ./src/ArrayClientes.o ./src/informes.o ./src/main.o ./src/publicacion.o ./src/utn.o   
-Finished building target: PrimerParcialLabo
+gcc  -o "SegundoParcialLabo"  ./src/Client.o ./src/Controller.o ./src/LinkedList.o ./src/ReportController.o ./src/Sale.o ./src/SaleController.o ./src/main.o ./src/parser.o ./src/utn.o   
+Finished building target: SegundoParcialLabo
  
+17:03:02 **** Incremental Build of configuration Debug for project SegundoParcialLabo ****
+make all 
+make: Nothing to be done for 'all'.
+17:03:38 **** Incremental Build of configuration Debug for project SegundoParcialLabo ****
+make all 
+make: Nothing to be done for 'all'.
+17:04:37 **** Incremental Build of configuration Debug for project SegundoParcialLabo ****
+make all 
+Building file: ../src/main.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building target: SegundoParcialLabo
+Invoking: GCC C Linker
+gcc  -o "SegundoParcialLabo"  ./src/Client.o ./src/Controller.o ./src/LinkedList.o ./src/ReportController.o ./src/Sale.o ./src/SaleController.o ./src/main.o ./src/parser.o ./src/utn.o   
+Finished building target: SegundoParcialLabo
+ 
+17:04:39 **** Incremental Build of configuration Debug for project SegundoParcialLabo ****
+make all 
+make: Nothing to be done for 'all'.
+17:05:32 **** Incremental Build of configuration Debug for project SegundoParcialLabo ****
+make all 
+Building file: ../src/Controller.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Controller.d" -MT"src/Controller.o" -o "src/Controller.o" "../src/Controller.c"
+Finished building: ../src/Controller.c
+ 
+Building target: SegundoParcialLabo
+Invoking: GCC C Linker
+gcc  -o "SegundoParcialLabo"  ./src/Client.o ./src/Controller.o ./src/LinkedList.o ./src/ReportController.o ./src/Sale.o ./src/SaleController.o ./src/main.o ./src/parser.o ./src/utn.o   
+Finished building target: SegundoParcialLabo
+ 
+17:05:33 **** Incremental Build of configuration Debug for project SegundoParcialLabo ****
+make all 
+make: Nothing to be done for 'all'.
+17:09:16 **** Incremental Build of configuration Debug for project SegundoParcialLabo ****
+make all 
+Building file: ../src/Controller.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Controller.d" -MT"src/Controller.o" -o "src/Controller.o" "../src/Controller.c"
+Finished building: ../src/Controller.c
+ 
+Building file: ../src/main.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building target: SegundoParcialLabo
+Invoking: GCC C Linker
+gcc  -o "SegundoParcialLabo"  ./src/Client.o ./src/Controller.o ./src/LinkedList.o ./src/ReportController.o ./src/Sale.o ./src/SaleController.o ./src/main.o ./src/parser.o ./src/utn.o   
+Finished building target: SegundoParcialLabo
+ 
+17:09:18 **** Incremental Build of configuration Debug for project SegundoParcialLabo ****
+make all 
+make: Nothing to be done for 'all'.
+17:09:57 **** Incremental Build of configuration Debug for project SegundoParcialLabo ****
+make all 
+make: Nothing to be done for 'all'.

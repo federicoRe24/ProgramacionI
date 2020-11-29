@@ -1,6 +1,6 @@
-23:42:30 **** Incremental Build of configuration Debug for project ProgramaciónI ****
+19:56:56 **** Incremental Build of configuration Debug for project ProgramaciónI ****
 make all 
 make: Nothing to be done for 'all'.
 
-23:42:31 Build Finished. 0 errors, 0 warnings. (took 515ms)
+19:56:57 Build Finished. 0 errors, 0 warnings. (took 667ms)
 

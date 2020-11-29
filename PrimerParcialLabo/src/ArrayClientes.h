@@ -27,17 +27,17 @@ struct
 
 }typedef Cliente;
 
-int initClientes(Cliente* list, int len);
+int initClientes(Cliente* list[], int len);
 int addCliente(Cliente* list, int len, int id, char name[],char lastName[],char cuit[]);
-int findClienteById(Cliente* list, int len,int id);
-int removeCliente(Cliente* list, int len, int id);
+int findClienteById(Cliente* list[], int len,int id);
+int removeCliente(Cliente* list[], int len, int id);
 int sortClientes(Cliente* list, int len, int order);
-int printClientes(Cliente* list, int length);
-int printCliente(Cliente* list, int len, int id);
+int printClientes(Cliente* list[], int len);
+int printCliente(Cliente* list[], int len, int id);
 int BorrarCliente(Cliente* list, int len);
 int CargarCliente(Cliente* list, int len);
 int ModificarCliente(Cliente* list, int len);
-int altaForzadaClientes(Cliente* list, int len);
+int altaForzadaClientes(Cliente* list[]);
 int primerCliente(Cliente* list, int len);
 
 #endif /* SRC_ARRAYCLIENTES_H_ */

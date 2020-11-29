@@ -14,6 +14,11 @@
 
 int main(void)
 {
+	int a = 5;
+	int b;
+	if(a < b)
+		printf("gato");
+
 	int variableInt;
 	char aMensaje[200];
 	int arrayInt[CANTIDAD_ELEMENTOS];

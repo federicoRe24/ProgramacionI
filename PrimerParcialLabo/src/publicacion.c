@@ -223,7 +223,7 @@ int publicacion_buscarId(Publicacion *array, int limite,int valorBuscado)
 	return retorno;
 }
 
-int borrarPublicacionesYCliente(Publicacion *arrayPublicaciones, int limitePublicaciones, Cliente *arrayClientes,
+int borrarPublicacionesYCliente(Publicacion *arrayPublicaciones, int limitePublicaciones, Cliente *arrayClientes[],
 		int limiteClientes)
 {
 	int retorno = -1;

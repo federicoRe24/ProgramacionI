@@ -27,7 +27,7 @@ int publicacion_buscarId(Publicacion *array, int limite,int valorBuscado);
 int publicacion_pausar(Publicacion *array, int limite, int id, int *avisosPausados);
 int publicacion_reanudar(Publicacion *array, int limite, int id, int *avisosPausados);
 int publicacion_borrar(Publicacion *array, int limite, int idCliente);
-int borrarPublicacionesYCliente(Publicacion *arrayPublicaciones, int limitePublicaciones, Cliente *arrayClientes,
+int borrarPublicacionesYCliente(Publicacion *arrayPublicaciones, int limitePublicaciones, Cliente *arrayClientes[],
 		int limiteClientes);
 int publicacionesPorCliente(Publicacion *array, int limite,int idCliente);
 int getIdClienteConMasAvisos(Publicacion* list, int len);

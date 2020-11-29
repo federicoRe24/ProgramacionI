@@ -5,11 +5,11 @@
 #include "alumno.h"
 #include "calculosArray.h"
 #include "Clase12.h"
-#include "Clase13.h"
+#include "punteros.h"
 
 int main(void)
 {
-	clase13();
+	punteros();
 
 	return EXIT_SUCCESS;
 }

@@ -1,0 +1,3 @@
+id,cantidadAfiches,nombreImagen,zona,estado,clientId
+1,5,foto,ZONA,1,1
+2,5,foto,Pico,1,3

@@ -6,7 +6,72 @@
 #include "ArrayClientes.h"
 #include "utn.h"
 
+/* Para la estructura de cada entidad
+ *
+ * new
+ * delete
+ * getXXXX
+ * setXXXX
+ *
+ * initArray
+ * findById
+ * generarId
+ *
+ * alta
+ * baja
+ * modif
+ * imprimir
+ */
+
 static int generarIdNuevo(void);
+
+Cliente* cliente_newConParametros(int id, char* name, char* lastName, char* cuit)
+{
+	Cliente* pc = NULL;
+	if(id>0 && name!=NULL && lastName!=NULL && cuit!=NULL)
+	{
+		pc = (Cliente*)malloc(sizeof(Cliente));
+		if(pc!=NULL)
+		{
+			pc->id= id;
+			pc->isEmpty=0;
+			strncpy(pc->name,name,sizeof(pc->name));
+			strncpy(pc->lastName,lastName,sizeof(pc->lastName));
+			strncpy(pc->cuit,cuit,sizeof(pc->cuit));
+		}
+	}
+	return pc;
+}
+
+void cliente_delete(Cliente* pc)
+{
+	if(pc!=NULL)
+		free(pc);
+}
+
+// Encapsular los campos en funciones -> getters y setters
+int cliente_getId(Cliente* pc, int* pVal)
+{
+	int ret=-1;
+	if(pc!=NULL)
+	{
+		*pVal = pc->id;
+		ret = 0;
+	}
+	return ret;
+}
+
+int cliente_setId(Cliente* pc, int val)
+{
+	int ret=-1;
+	if(pc!=NULL && val>0)
+	{
+		 pc->id = val;
+		ret = 0;
+	}
+	return ret;
+}
+
 
 /** \brief To indicate that all position in the array are empty,
 * this function put the flag (isEmpty) in TRUE in all
@@ -16,14 +81,15 @@ static int generarIdNuevo(void);
 * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
 *
 */
-int initClientes(Cliente* list, int len)
+int initClientes(Cliente* list[], int len) // Cliente* también se puede pasar como Cliente** list
 {
 	int retorno = -1;
 	if(list != NULL && len > 0)
 	{
 		for(int i=0;i<len;i++)
 		{
-			list[i].isEmpty = TRUE;
+			list[i] = NULL;
+			//*(list+i) = NULL;
 		}
 		retorno = 0;
 	}
@@ -75,17 +141,20 @@ int addCliente(Cliente* list, int len, int id, char name[],char lastName[],char 
 pointer received or employee not found]
 *
 */
-int findClienteById(Cliente* list, int len,int id)
+int findClienteById(Cliente* list[], int len,int id)
 {
 	int retorno = -1;
-	if(list != NULL && id > 0)
+	if(list != NULL && len > 0 && id > 0)
 	{
 		for(int i=0; i < len; i++)
 		{
-			if(list[i].id == id)
+			if(list[i]!=NULL) // Podria poner tambien if((*(list+i))->id == id)
 			{
-				retorno = i;
-				break;
+				if(list[i]->id == id)
+				{
+					retorno = i;
+					break;
+				}
 			}
 		}
 	}
@@ -101,20 +170,24 @@ int findClienteById(Cliente* list, int len,int id)
 find a cliente] - (0) if Ok
 *
 */
-int removeCliente(Cliente* list, int len, int id)
+int removeCliente(Cliente* list[], int len, int id)
 {
 	int retorno = -1;
-	if(list != NULL && id > 0)
+	int indiceABorrar;
+	if(list != NULL && len > 0 && id > 0)
 	{
-		for(int i=0; i < len; i++)
+		indiceABorrar = findClienteById(list, len, id);
+		if(indiceABorrar != -1)
 		{
-			if(list[i].id == id)
-			{
-				list[i].id = -1;
-				list[i].isEmpty = TRUE;
-				retorno = 0;
-				break;
-			}
+			// borro cliente posicion "IndiceABorrar"
+
+			// 1) free en direccion de memoria de cliente
+			cliente_delete(list[indiceABorrar]);
+
+			// 2) NULL en array
+			list[indiceABorrar] = NULL;
+
+			retorno = 0;
 		}
 	}
 	return retorno;
@@ -167,17 +240,14 @@ indicate UP or DOWN order
 * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
 *
 */
-int printClientes(Cliente* list, int len)
+int printClientes(Cliente* list[], int len)
 {
 	int retorno = -1;
 	if(list != NULL && len > 0)
 	{
 		for(int i=0;i<len;i++)
 		{
-			if(list[i].isEmpty == FALSE)
-			{
-				printf("Id: %d - Nombre: %s - Apellido: %s - Cuit: %s\n",list[i].id,list[i].name, list[i].lastName,list[i].cuit);
-			}
+			printf("Id: %d - Nombre: %s - Apellido: %s - Cuit: %s\n",list[i]->id,list[i]->name, list[i]->lastName,list[i]->cuit);
 		}
 		retorno = 0;
 	}
@@ -193,16 +263,16 @@ int printClientes(Cliente* list, int len)
 *
 */
 
-int printCliente(Cliente* list, int len, int id)
+int printCliente(Cliente* list[], int len, int id)
 {
 	int retorno = -1;
 	int i;
 	if(list != NULL && len > 0 && id > 0)
 	{
 		i = findClienteById(list, len, id);
-		if(findClienteById(list, len, id) != -1)
+		if(i != -1)
 		{
-			printf("Id: %d - Nombre: %s - Apellido: %s - Cuit: %s\n",list[i].id,list[i].name, list[i].lastName,list[i].cuit);
+			printf("Id: %d - Nombre: %s - Apellido: %s - Cuit: %s\n",list[i]->id,list[i]->name, list[i]->lastName,list[i]->cuit);
 		}
 		else
 		{
@@ -348,28 +418,23 @@ static int generarIdNuevo(void)
 }
 
 
-int altaForzadaClientes(Cliente* list, int len)
+int altaForzadaClientes(Cliente* list[])
 {
 	int retorno = -1;
-	if(	list != NULL && len > 0)
+	Cliente *pc;
+	if(	list != NULL)
 	{
-		list[0].id = generarIdNuevo();
-		strncpy(list[0].name,"Federico",LONG_NOMBRE);
-		strncpy(list[0].lastName,"Re",LONG_NOMBRE);
-		strncpy(list[0].cuit,"20362214166",LONG_CUIT);
-		list[0].isEmpty = FALSE;
+		// 1) construyo el cliente
+		pc = cliente_newConParametros(generarIdNuevo(), "Federico", "Re", "20362214166");
 
-		list[1].id = generarIdNuevo();
-		strncpy(list[1].name,"Juan",LONG_NOMBRE);
-		strncpy(list[1].lastName,"Perez",LONG_NOMBRE);
-		strncpy(list[1].cuit,"18362214165",LONG_CUIT);
-		list[1].isEmpty = FALSE;
+		// 2) agrego el cliente al array
+		list[0] = pc;
 
-		list[2].id = generarIdNuevo();
-		strncpy(list[2].name,"Nicolas",LONG_NOMBRE);
-		strncpy(list[2].lastName,"Gimenez",LONG_NOMBRE);
-		strncpy(list[2].cuit,"25362214160",LONG_CUIT);
-		list[2].isEmpty = FALSE;
+		pc = cliente_newConParametros(generarIdNuevo(), "Juan", "Perez", "18362214165");
+		list[1] = pc;
+
+		pc = cliente_newConParametros(generarIdNuevo(), "Nicolas", "Gimenez", "25362214160");
+		list[2] = pc;
 
 		retorno = 0;
 	}

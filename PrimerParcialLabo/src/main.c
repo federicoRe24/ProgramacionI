@@ -11,8 +11,11 @@ int main(void)
 	int respuesta;
 	int auxiliarId;
 	int avisosPausados = 0;
-	Cliente arrayClientes[LEN_CLIENTES];
+
+	Cliente* arrayClientes[LEN_CLIENTES];
 	initClientes(arrayClientes, LEN_CLIENTES);
+
+
 	Publicacion arrayPublicaciones[LEN_PUBLICACIONES];
 	initPublicaciones(arrayPublicaciones, LEN_PUBLICACIONES);
 
@@ -26,7 +29,7 @@ int main(void)
 			switch(opcion)
 			{
 				case 1:
-					if(altaForzadaClientes(arrayClientes, LEN_CLIENTES) != 0)
+					if(altaForzadaClientes(arrayClientes) != 0)
 					//if(CargarCliente(arrayClientes, LEN_CLIENTES) != 0)
 					{
 						printf("El cliente no fue cargado ya que no se ingresaron valores válidos\n");

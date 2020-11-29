@@ -1,0 +1,5 @@
+id,nombre,apellido,cuit
+1,Camila,Lezcano,12-12022929-0
+2,Tano,Re,12-12022929-0
+3,Lionel,Messi,15-12345678-0
+4,Diego,Maradona,18-20105080-9
